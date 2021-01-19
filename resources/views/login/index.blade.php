@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login Administrador</title>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -19,23 +19,19 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
         @charset "utf-8";
-
-
         @import url//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
-
-
 
         div.main{
             background: #0264d6; /* Old browsers */
-        background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
-        background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
-        background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
-        background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
-        background: radial-gradient(ellipse at center,  #0264d6 1%,#1c2b5a 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-        height:calc(100vh);
-        width:100%;
+            background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
+            background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
+            background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
+            background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
+            background: radial-gradient(ellipse at center,  #0264d6 1%,#1c2b5a 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            height:calc(100vh);
+            width:100%;
         }
 
         [class*="fontawesome-"]:before {
@@ -48,16 +44,14 @@
         box-sizing: border-box;
             margin:0px auto;
 
-        &:before,
-        &:after {
-            box-sizing: border-box;
-        }
-
+            &:before,
+            &:after {
+                box-sizing: border-box;
+            }
         }
 
         body {
-        
-            color: #606468;
+        color: #606468;
         font: 87.5%/1.5em 'Open Sans', sans-serif;
         margin: 0;
         }
@@ -193,14 +187,14 @@
             <center>
             <div class="middle">
                 <div id="login">
-                    <form action="javascript:void(0);" method="get">
+                    <form action="{{route('login')}}" method="post">
+                        @csrf
                         <fieldset class="clearfix">
-                            <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Username" required></p>
-                            <p><span class="fa fa-lock"></span><input type="password"  Placeholder="Password" required></p> 
+                            <p ><span class="fa fa-user"></span><input name="username" type="text"  Placeholder="Usuário" required></p>
+                            <p><span class="fa fa-lock"></span><input name="password" type="password"  Placeholder="Senha" required></p> 
                             <div>
-                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Forgot password?</a></span>
-                                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Sign In"></span>
-                             </div>
+                                <span style="width:100%; text-align:right;  display: inline-block;"><input type="submit" value="Entrar"></span>
+                            </div>
                         </fieldset>
                         <div class="clearfix"></div>
                     </form>

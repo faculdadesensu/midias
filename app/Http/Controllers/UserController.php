@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function login(Request $request){
        
-        $username       = $request->username;
+        $username   = $request->username;
         $password   = $request->password;
 
         $users      = User::where('username', '=', $username)->where('password', '=', $password)->first();
@@ -19,8 +19,9 @@ class UserController extends Controller
             @session_start();
             $_SESSION['id_user'] = $users->id;
             $_SESSION['user_name'] = $users->name;
+            $_SESSION['level'] = $users->level;
 
-            if($_SESSION['level_user'] == 'admin'){
+            if($_SESSION['level'] == 'admin'){
                 return view('painel-admin.index');
             }
            
@@ -33,7 +34,7 @@ class UserController extends Controller
     public function logout(){
        @session_start();
        @session_destroy();
-       return view('index');
+       return view('login.index');
     }
 
     public function delete(User $item){
