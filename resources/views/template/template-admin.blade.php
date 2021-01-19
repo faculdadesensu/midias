@@ -5,6 +5,7 @@ use App\Models\Usuario;
 @session_start();
 $id_usuario = @$_SESSION['id_user'];
 $usuario = DB::select('select * from users where id ='.$id_usuario);
+
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +37,8 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
     <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <link rel="shortcut icon" href="{{ URL::asset('img/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ URL::asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ URL::asset('img/logo_sig.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ URL::asset('img/logo_sig.png') }}" type="image/x-icon">
 
 </head>
 
@@ -77,10 +78,7 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('cadAtend')}}">Atendentes</a>
-                        <a class="collapse-item" href="{{route('recep.index')}}">Recepcionistas</a>
-                        <a class="collapse-item" href="{{route('users.index')}}">Usuários</a>
-                        <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
+                        <a class="collapse-item" href="#">Usuários</a>
                     </div>
                 </div>
             </li>
@@ -89,43 +87,19 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-home"></i>
-                    <span>Cadastro Serviço</span>
+                    <span>Cadastro de Links</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('service.index')}}">Serviços</a>
+                        <a class="collapse-item" href="#">Links</a>
 
                     </div>
                 </div>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                rotinas
-            </div>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('agendas.index')}}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Agenda</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
         </ul>
         <!-- End of Sidebar -->
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -139,19 +113,13 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$usuario[0]->name}}</span>
-                                <img class="img-profile rounded-circle" src="{{ URL::asset('img/default.jpg') }}">
+                                <img class="img-profile rounded-circle" src="{{ URL::asset('img/sem-foto.jpg') }}">
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -212,22 +180,22 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nome</label>
-                            <input value="{{$usuario[0]->name}}" type="text" class="form-control" id="name" name="name" placeholder="Nome">
+                            <input value="{{$usuario[0]->name}}" type="text" class="form-control" name="name" placeholder="Nome">
                         </div>
 
                         <div class="form-group">
-                            <label>CPF</label>
-                            <input value="{{$usuario[0]->cpf}}" type="text" class="form-control cpf" id="cpf" name="cpf" placeholder="E-mail">
+                            <label>Username</label>
+                            <input value="{{$usuario[0]->username}}" type="text" class="form-control cpf" name="username" placeholder="Usuário">
                         </div>
 
                         <div class="form-group">
                             <label>Email</label>
-                            <input value="{{$usuario[0]->user}}" type="email" class="form-control" id="user" name="user" placeholder="Email">
+                            <input value="{{$usuario[0]->email}}" type="email" class="form-control" id="email" name="email" placeholder="Email">
                         </div>
 
                         <div class="form-group">
                             <label>Senha</label>
-                            <input value="" type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                            <input value="{{$usuario[0]->password}}" type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
                         </div>
                     </div>
                     <div class="modal-footer">
