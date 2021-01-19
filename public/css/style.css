@@ -1,0 +1,111 @@
+.direita{
+   position:absolute;
+   right:20px;
+}
+
+.topo{
+   position:absolute;
+   top:0px;
+}
+
+
+*{
+   padding: 0;
+   margin:0;
+   box-sizing: border-box;
+}
+
+hr {
+   border-color: #fff;
+}
+
+body{
+   background: linear-gradient( #125591 20%, #4a8dba);
+   background-size: 300% 150%;
+}
+
+.btn{
+   color: #F8F9F9;
+   display: block;
+   font-family: 'Open Sans';
+   font-size: 16px;
+   line-height: 25px;
+   text-align: center;
+   text-decoration: none;
+   padding: 8px 10px;
+   position: relative;
+   width: 253px;
+   margin-left: 2px;
+   margin-bottom: 8px;
+   margin-top: 8px;
+}
+
+#btn-botton{
+   border-bottom: 0px;
+   margin-bottom: 30px;
+}
+
+.col-total{
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.img-logo{
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 30px;
+   width: 100px;
+}
+
+#instagram{
+   background-image: url(../img/Asset\ 6@3x.png);
+}
+
+#facebook{
+   background-image: url(../img/facebook.png);
+}
+
+#whatsapp{
+   background-image: url(../img/Asset\ 11@3x.png);
+   margin-left: 10px;
+}
+
+#youtube{
+   background-image: url(../img/Asset\ 8@3x.png);
+}
+
+#linkdin{
+   background-image: url(../img/linkdim.png);
+}
+
+#twitter{
+   background-image: url(../img/twitter.png);    
+}
+
+.icon-social{
+   background-size: 100% 100%;
+   color: rgb(255,255,255, 0);
+   margin-right: 10px;
+   padding: 4px 4px;
+}
+
+.footer1{
+   font-family: 'Open Sans';
+   color: #ffffff;
+   margin-bottom: 10px;
+   margin-left: 20px;
+   position: relative;
+   bottom:0;
+   left:0;
+   font-family: 'Open Sans';
+   font-size: 12px;
+}
+
+.footer{
+   width: 170px;
+   font-size: 10px;
+}
