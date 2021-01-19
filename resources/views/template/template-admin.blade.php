@@ -78,7 +78,7 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Usuários</a>
+                        <a class="collapse-item" href="{{ route('users.index')}}">Usuários</a>
                     </div>
                 </div>
             </li>
@@ -130,7 +130,7 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
                                 </a>
 
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('user.logout')}}">
+                                <a class="dropdown-item" href="{{ route('users.logout')}}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
                                     Sair
                                 </a>

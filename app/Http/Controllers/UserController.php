@@ -44,12 +44,14 @@ class UserController extends Controller
 
     public function modal($id){
         $users = User::orderby('id', 'desc')->paginate();
-        return view('painel-admin.user.index', ['users' => $users, 'id' => $id]);
+        return view('painel-admin.users.index', ['users' => $users, 'id' => $id]);
     }
 
     public function index(){
+        
         $users = User::orderby('id', 'desc')->paginate();
-        return view('painel-admin.user.index', ['users' => $users]);
+        
+        return view('painel-admin.users.index', ['users' => $users]);
     }
 
     
@@ -58,81 +60,46 @@ class UserController extends Controller
         $tabela              = new User();
        
         $tabela->name        = $request->name;
-        $tabela->fone        = $request->fone;
+        $tabela->username    = $request->username;
+        $tabela->email       = $request->email;
+        $tabela->username    = $request->username;
+        $tabela->level       = 'admin';
 
-        $check = User::where('name', '=', $request->name)->orwhere('fone', '=', $request->fone)->count();
+        $check = User::where('username', '=', $request->username)->count();
         if($check > 0){
             echo "<script language='javascript'> window.alert('Já existe um cliente com o Nome ou Telefone informado!') </script>";
-            $user_session =  $_SESSION['level_user'];
-
-            if ($user_session == 'admin') {
-                return view('painel-admin.cliente.create');
-            }else{
-                return view('painel-recepcao.cliente.create');
-            }
+            return view('painel-admin.users.create');
         }
 
         $tabela->save();
         
-        $user_session =  $_SESSION['level_user'];
-
-        if ($user_session == 'admin') {
-            return redirect()->route('clientes.index');
-        }else{
-            return redirect()->route('painel-recepcao-clientes.index');
-        }
+        return redirect()->route('users.index');
     }
 
     public function edit(User $item){
-       
-        $user_session =  $_SESSION['level_user'];
-
-        if ($user_session == 'admin') {
-            return view('painel-admin.cliente.edit', ['item' => $item]);
-        }else{
-            return view('painel-recepcao.cliente.edit', ['item' => $item]);
-        }  
+        return view('painel-admin.users.edit', ['item' => $item]); 
     }
 
     public function editar(Request $request, User $item){
 
-        $item->name     = $request->name;
-        $item->fone     = $request->fone;
-        $oldName        = $request->oldName;
-        $oldFone        = $request->oldFone;
-
-        $user_session =  $_SESSION['level_user'];
+        $item->name        = $request->name;
+        $item->username    = $request->username;
+        $item->email       = $request->email;
+        $item->username    = $request->username;
+        $oldName           = $request->oldName;
+        $oldFone           = $request->oldFone;
 
         if($oldFone != $request->fone){
-            $check = User::where('fone', '=', $request->fone)->count();
+            $check = User::where('username', '=', $request->username)->count();
             if($check > 0){
                 echo "<script language='javascript'> window.alert('Cliente já cadastrado. Telefone já cadastrado') </script>";
-                if ($user_session == 'admin') {
-                    return view('painel-admin.cliente.edit', ['item' => $item]);
-                }else{
-                    return view('painel-recepcao.cliente.edit', ['item' => $item]);
-                } 
-            }
-        }if ($oldName != $request->name) {
-            $check = User::where('name', '=', $request->name)->count();
-            if($check > 0){
-                echo "<script language='javascript'> window.alert('Cliente já cadastrado. Email já cadastrado!') </script>";                
-                
-                if ($user_session == 'admin') {
-                    return view('painel-admin.cliente.edit', ['item' => $item]);
-                }else{
-                    return view('painel-recepcao.cliente.edit', ['item' => $item]);
-                } 
+                return view('painel-recepcao.users.edit', ['item' => $item]);
             }
         }
 
         $item->save();
-        
-        if ($user_session == 'admin') {
-            return redirect()->route('clientes.index');
-        }else{
-            return redirect()->route('painel-recepcao-clientes.index');
-        }
+        return redirect()->route('users.index');
+
     }
 
 }
