@@ -91,7 +91,7 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Links</a>
+                        <a class="collapse-item" href="{{ route('links.index')}}">Links</a>
 
                     </div>
                 </div>

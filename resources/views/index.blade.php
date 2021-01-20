@@ -30,22 +30,15 @@
 <body>
     <div class="col-total">     
         <div class="col-botton">
-            <img class="img-logo" src="{{ URL::asset('img/Asset 9@3x.png')}}" > 
-	        <p><a class="btn" href="https://conteudo.faculdadesensu.edu.br/9-dicas-para-o-enem">Dicas para o Enem</a></p>
+            <img class="img-logo" src="{{ URL::asset('img/Asset 9@3x.png')}}" >
+            <?php
+              use App\Models\Link;
+              $links = Link::orderby('id', 'desc')->paginate();  
+            ?>
+            @foreach ($links as $item)
+            <p><a class="btn2" href="{{$item->link}}">{{$item->title}}</a></p>
             <hr >
-            <p><a class="btn" href="https://conteudo.faculdadesensu.edu.br/organizador-de-estudos">Organizador de Estudos</a></p>
-            <hr>          
-	        <p><a class="btn" href="https://conteudo.faculdadesensu.edu.br/guia-de-profissoes">Guia de Profissões</a></p>
-            <hr>
-	        <p><a class="btn" href="https://conteudo.faculdadesensu.edu.br/cronograma-carreiras-policiais">Cronograma para Concursos Policiais</a></p>
-            <hr>
-            <p><a class="btn" href="https://faculdadesensu.edu.br">Site</a></p>
-            <hr >
-            <p><a class="btn" href="https://blog.faculdadesensu.edu.br">Blog</a></p>
-            <hr>
-            <p><a class="btn" href="https://faculdadesensu.edu.br/bolsa/">Programa de Bolsas</a></p>
-            <hr>
-            <p><a class="btn" href="https://faculdadesensu.edu.br/comunicados/276-recrutamento" id="btn-botton">Trabalhe Conosco</a></p>
+            @endforeach
             <div class="icon">
                 <a class= "icon-social" id="whatsapp" href="https://api.whatsapp.com/send?phone=556239334450" >.....</a>
                 <a class= "icon-social" id="instagram" href="https://www.instagram.com/faculdade_sensu/">.....</a>
@@ -56,8 +49,8 @@
             </div>
            </div>
    </div>
-    <footer class="footer1">        
-         <div class="footer">
+    <footer class="footer122">        
+         <div class="footer2">
         		<small class="d-block mb-3 text-muted">&copy; Powered by: FAS - 2020</small>
 		</div>
 	</footer>  

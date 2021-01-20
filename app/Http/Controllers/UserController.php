@@ -91,13 +91,13 @@ class UserController extends Controller
         $item->username    = $request->username;
         $item->email       = $request->email;
         $item->username    = $request->username;
-        $oldUsername           = $request->oldFone;
+        $oldUsername           = $request->oldUsername;
 
         if($oldUsername!= $request->username){
             $check = User::where('username', '=', $request->username)->count();
             if($check > 0){
                 echo "<script language='javascript'> window.alert('Cliente já cadastrado. Telefone já cadastrado') </script>";
-                return view('painel-recepcao.users.edit', ['item' => $item]);
+                return view('painel-admin.users.edit', ['item' => $item]);
             }
         }
 

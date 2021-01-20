@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,12 @@ Route::get('users',                     [UserController::class, 'index'])->name(
 //Rotas painel admin
 Route::get('home-admin',                [AdminController::class, 'index'])->name('admin.index');
 Route::put('admin/{user}',              [AdminController::class, 'edit'])->name('admin.edit');
+
+//Rotas Links
+Route::post('links',                    [LinkController::class, 'insert'])->name('links.insert');
+Route::get('links/inserir',             [LinkController::class, 'create'])->name('links.inserir');
+Route::get('links/{item}/edit',         [LinkController::class, 'edit'])->name('links.edit');
+Route::put('links/{item}',              [LinkController::class, 'editar'])->name('links.editar');
+Route::delete('links/{item}',           [LinkController::class, 'delete'])->name('links.delete');
+Route::get('links/{item}',              [LinkController::class, 'modal'])->name('links.modal');
+Route::get('links',                     [LinkController::class, 'index'])->name('links.index');
