@@ -54,6 +54,11 @@ class UserController extends Controller
         return view('painel-admin.users.index', ['users' => $users]);
     }
 
+    public function create(){
+        return view('painel-admin.users.create');
+    }
+
+
     
     public function insert(Request $request){
      
