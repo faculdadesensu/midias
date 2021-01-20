@@ -19,7 +19,7 @@ Route::post('painel',                  [UserController::class, 'login'])->name('
 Route::post('users',                    [UserController::class, 'insert'])->name('users.insert');
 Route::get('users/inserir',             [UserController::class, 'create'])->name('users.inserir');
 Route::get('users/{item}/edit',         [UserController::class, 'edit'])->name('users.edit');
-Route::put('users/{item}',              [UserController::class, 'editar'])->name('user.editar');
+Route::put('users/{item}',              [UserController::class, 'editar'])->name('users.editar');
 Route::delete('users/{item}',           [UserController::class, 'delete'])->name('users.delete');
 Route::get('users/{item}',              [UserController::class, 'modal'])->name('users.modal');
 Route::get('users',                     [UserController::class, 'index'])->name('users.index');
