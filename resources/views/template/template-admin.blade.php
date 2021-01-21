@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\DB;
 
 @session_start();
 $id_usuario = @$_SESSION['id_user'];
-$usuario = DB::select('select * from users where id ='.$id_usuario);
+$usuario = DB::select('select * from users where id =' . $id_usuario);
 
 ?>
 
@@ -145,6 +145,27 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    @if(\Session::has('success'))
+
+                    <div class="alert alert-success alert-position" role="alert" id="success-alert">
+                        {{utf8_decode(\Session::get('success'))}}
+                    </div>
+
+                    <script>
+                        // Faz com que o alerta desapareça após 2 segundos em um tempo de 0.5 segundos de acordo com seu ID.
+                        $(document).ready(function() {
+                            $('#success-alert').hide();
+                            $('#success-alert').fadeTo(2000, 500).fadeOut(500);
+                        });
+                    </script>
+
+                    @elseif(\Session::has('error'))
+
+                    <div class="alert alert-danger" role="alert" id="danger-alert">
+                        {{utf8_decode(\Session::get('error'))}}
+                    </div>
+
+                    @endif
 
                     @yield('content')
 
@@ -233,4 +254,5 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('js/mascaras.js') }}"></script>
 </body>
+
 </html>
