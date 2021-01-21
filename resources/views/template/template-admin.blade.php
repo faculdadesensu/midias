@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Usuario;
+use Illuminate\Support\Facades\DB;
 
 @session_start();
 $id_usuario = @$_SESSION['id_user'];
@@ -31,6 +31,7 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
     <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
 
     <link href="{{ URL::asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('vendor/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 
 
     <!-- Bootstrap core JavaScript-->
@@ -224,6 +225,8 @@ $usuario = DB::select('select * from users where id ='.$id_usuario);
     <!-- Page level plugins -->
     <script src="{{ URL::asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datatables/responsive.bootstrap4.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{ URL::asset('js/demo/datatables-demo.js') }}"></script>

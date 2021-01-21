@@ -41,14 +41,7 @@ if(!isset($id)){
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#dataTable').dataTable({
-      "ordering": false
-    })
 
-  });
-</script>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
