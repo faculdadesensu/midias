@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -11,172 +11,119 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         body {
             background: radial-gradient(ellipse at center, #4a8dba 1%, #125591 70%);
             height: calc(100vh);
-            width: 100%;
-            color: #606468;
             font: 87.5%/1.5em 'Open Sans', sans-serif;
-            margin: 0;
         }
 
-        /* ---------- GENERAL ---------- */
-
-        * {
-            box-sizing: border-box;
-            margin: 0px auto;
-        }
-
-        a {
-            color: #eee;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        input {
-            border: none;
-            font-family: 'Open Sans', Arial, sans-serif;
-            font-size: 14px;
-            line-height: 1.5em;
-            padding: 0;
-            -webkit-appearance: none;
-        }
-
-        p {
-            line-height: 1.5em;
-        }
-
-        .clearfix {
-            *zoom: 1;
-        }
-
-        .container {
-            left: 50%;
-            position: fixed;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* ---------- LOGIN ---------- */
-
-        #login form {
-            width: 250px;
-        }
-
-        #login,
         .logo {
             display: inline-block;
-            width: 40%;
+            height: 175px;
         }
 
-        #login {
-            border-right: 1px solid #fff;
-            padding: 0px 22px;
-            width: 59%;
-        }
-
-        .logo {
-            color: #fff;
-            font-size: 50px;
-            line-height: 125px;
-        }
-
-        #login form span.fa {
-            background-color: #fff;
-            border-radius: 3px 0px 0px 3px;
+        .fa {
             color: #000;
-            display: block;
-            float: left;
-            height: 50px;
-            font-size: 24px;
-            line-height: 50px;
-            text-align: center;
-            width: 50px;
+            font-size: 23px;
         }
 
-        #login form input {
-            height: 50px;
-        }
-
-        fieldset {
-            padding: 0;
-            border: 0;
-            margin: 0;
-        }
-
-        #login form input[type="text"],
-        input[type="password"] {
-            background-color: #fff;
-            border-radius: 0px 3px 3px 0px;
-            color: #000;
-            margin-bottom: 1em;
-            padding: 0 16px;
-            width: 200px;
-        }
-
-        #login form input[type="submit"] {
-            border-radius: 3px;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            background-color: #000000;
-            color: #eee;
-            font-weight: bold;
-            /* margin-bottom: 2em; */
-            text-transform: uppercase;
-            padding: 5px 10px;
-            height: 30px;
-        }
-
-        #login form input[type="submit"]:hover {
-            background-color: #d44179;
-        }
-
-        #login>p {
+        #logo-mobile {
+            padding-bottom: 25px;
             text-align: center;
         }
 
-        #login>p span {
-            padding-left: 5px;
+        /* Responsividade descktop > 576px*/
+        @media(min-width:576px) {
+            .container {
+                left: 50%;
+                position: fixed;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            #btn-entrar {
+                text-align: right;
+            }
+
+            #login {
+                border-right: 1px solid #fff;
+            }
         }
 
-        .middle {
-            display: flex;
-            width: 600px;
+        /* Responsividade mobile < 576px*/
+        @media(max-width:576px) {
+            .container {
+                position: fixed;
+                top: 20%;
+            }
+
+            #btn-entrar {
+                text-align: center;
+            }
         }
     </style>
 </head>
 
+<script>
+    $(document).ready(function() {
+        atualizaResponsividade();
+    });
+
+    $(window).resize(function() {
+        atualizaResponsividade();
+    });
+
+    // Atualiza a posição da logo de acordo com a resolução da tela.
+    function atualizaResponsividade() {
+        var width = $(window).width();
+        if (width < 576) {
+            $("#logo-mobile").attr('hidden', false);
+            $("#logo-desktop").attr('hidden', true);
+        } else {
+            $("#logo-mobile").attr('hidden', true);
+            $("#logo-desktop").attr('hidden', false);
+        }
+    }
+</script>
+
 <body>
     <div class="main">
         <div class="container">
-            <center>
-                <div class="middle">
-                    <div id="login">
-                        <form action="{{route('login')}}" method="post">
-                            @csrf
-                            <fieldset class="clearfix">
-                                <p><span class="fa fa-user"></span><input name="username" type="text" Placeholder="Usuário" required></p>
-                                <p><span class="fa fa-lock"></span><input name="password" type="password" Placeholder="Senha" required></p>
-                                <div>
-                                    <span style="width:100%; text-align:right;  display: inline-block;"><input type="submit" value="Entrar"></span>
-                                </div>
-                            </fieldset>
-                            <div class="clearfix"></div>
-                        </form>
-                        <div class="clearfix"></div>
-                    </div> <!-- end login -->
-                    <div class="logo">LOGO
-                        <div class="clearfix"></div>
+            <div class="row">
+                <div id="login" class="offset-sm-2 col-sm-4 offset-1 col-10">
+                    <div id="logo-mobile" class="col-sm-6" hidden>
+                        <img class="logo" src="{{ URL::asset('img/Asset 9@3x.png')}}">
                     </div>
+                    <form action="{{route('login')}}" method="post">
+                        @csrf
+
+                        <div class="input-group mb-3 input-group-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text fa fa-user" id="input-group1"></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Usuário" name="username" aria-label="username" aria-describedby="input-group1" required>
+                        </div>
+
+                        <div class="input-group mb-3 input-group-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text fa fa-lock" id="input-group2"></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Senha" name="password" aria-label="password" aria-describedby="input-group2" required>
+                        </div>
+                        <div id="btn-entrar">
+                            <input class="btn btn-lg btn-dark" type="submit" value="Entrar"></span>
+                        </div>
+                    </form>
                 </div>
-            </center>
+                <div id="logo-desktop" class="col-sm-6">
+                    <img class="logo" src="{{ URL::asset('img/Asset 9@3x.png')}}">
+                </div>
+            </div>
         </div>
+    </div>
     </div>
 </body>
 
