@@ -41,6 +41,15 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
     <link rel="shortcut icon" href="{{ URL::asset('img/logo_sig.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ URL::asset('img/logo_sig.png') }}" type="image/x-icon">
 
+    <!-- Page level plugins -->
+    <script src="{{ URL::asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datatables/responsive.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ URL::asset('js/demo/datatables-demo.js') }}"></script>
+
 </head>
 
 <body id="page-top">
@@ -60,8 +69,6 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -69,8 +76,6 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
             <div class="sidebar-heading">
                 Cadastros
             </div>
-
-
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -99,6 +104,24 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                MOODLE
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOperacoes" aria-expanded="true" aria-controls="collapseOperacoes">
+                    <i class="fas fa-wrench"></i>
+                    <span> Ações</span>
+                </a>
+                <div id="collapseOperacoes" class="collapse" aria-labelledby="headingOperacoes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('moodle.index')}}">Bloqueio/Desbloqueio</a>
+                    </div>
+
+                </div>
+            </li>
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -243,14 +266,6 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
     <script src="{{ URL::asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ URL::asset('js/demo/chart-pie-demo.js') }}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{ URL::asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/datatables/responsive.bootstrap4.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ URL::asset('js/demo/datatables-demo.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('js/mascaras.js') }}"></script>
 </body>

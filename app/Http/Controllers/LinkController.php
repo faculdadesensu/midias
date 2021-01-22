@@ -9,22 +9,33 @@ class LinkController extends Controller
 {
     public function delete(Link $item)
     {
-        $item->delete();
-        return redirect()->route('links.index');
+        try {
+            $item->delete();
+            return redirect()->route('links.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
+        } catch (\Throwable $th) {
+            return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
+        }
     }
 
     public function modal($id)
     {
-        $links = Link::orderby('id', 'desc')->paginate();
-        return view('painel-admin.links.index', ['links' => $links, 'id' => $id]);
+        try {
+            $links = Link::orderby('id', 'desc')->paginate();
+            return view('painel-admin.links.index', ['links' => $links, 'id' => $id]);        
+        } catch (\Throwable $th) {
+            return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
+        }
     }
 
     public function index()
     {
+        try {
+            $links = Link::orderby('id', 'desc')->paginate();
 
-        $links = Link::orderby('id', 'desc')->paginate();
-
-        return view('painel-admin.links.index', ['links' => $links]);
+            return view('painel-admin.links.index', ['links' => $links]);        
+        } catch (\Throwable $th) {
+            return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
+        }
     }
 
     public function create()
@@ -32,11 +43,8 @@ class LinkController extends Controller
         return view('painel-admin.links.create');
     }
 
-
-
     public function insert(Request $request)
     {
-
         try {
             $tabela              = new Link();
 
@@ -44,14 +52,14 @@ class LinkController extends Controller
             $tabela->link        = $request->link;
 
             $check = Link::where('link', '=', $request->link)->count();
-            /*if ($check > 0) {
+            if ($check > 0) {
                 echo "<script language='javascript'> window.alert('Já existe cadastro com o link informado!') </script>";
                 return view('painel-admin.links.create');
-            }*/
+            }
 
             $tabela->save();
 
-            return redirect()->route('links.index')->with('success', utf8_encode('Registro inserido com sucesso.'));
+            return redirect()->route('links.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
             return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
         }
@@ -64,19 +72,22 @@ class LinkController extends Controller
 
     public function editar(Request $request, Link $item)
     {
-
-        $item->title       = $request->title;
-        $item->link        = $request->link;
-        $oldLink           = $request->oldLink;
-        if ($oldLink != $request->link) {
-            $check = Link::where('link', '=', $request->link)->count();
-            if ($check > 0) {
-                echo "<script language='javascript'> window.alert('Link já cadastrado.') </script>";
-                return view('painel-admin.links.edit', ['item' => $item]);
+        try {
+            $item->title       = $request->title;
+            $item->link        = $request->link;
+            $oldLink           = $request->oldLink;
+            if ($oldLink != $request->link) {
+                $check = Link::where('link', '=', $request->link)->count();
+                if ($check > 0) {
+                    echo "<script language='javascript'> window.alert('Link já cadastrado.') </script>";
+                    return view('painel-admin.links.edit', ['item' => $item]);
+                }
             }
-        }
 
-        $item->save();
-        return redirect()->route('links.index');
+            $item->save();
+            return redirect()->route('links.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
+        } catch (\Throwable $th) {
+            return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
+        }
     }
 }

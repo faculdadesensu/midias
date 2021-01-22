@@ -2,14 +2,16 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\MoodleController;
 use App\Http\Controllers\UserController;
+use Illuminate\Cache\Lock;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/admin', function(){
+Route::get('/admin', function () {
     return view('login.index');
 });
 
@@ -38,3 +40,8 @@ Route::put('links/{item}',              [LinkController::class, 'editar'])->name
 Route::delete('links/{item}',           [LinkController::class, 'delete'])->name('links.delete');
 Route::get('links/{item}',              [LinkController::class, 'modal'])->name('links.modal');
 Route::get('links',                     [LinkController::class, 'index'])->name('links.index');
+
+//Rotas Moodle
+Route::get('moodle/index',              [MoodleController::class, 'index'])->name('moodle.index');
+Route::get('moodle/lock',               [MoodleController::class, 'lock'])->name('moodle.lock');
+Route::get('moodle/unlock',             [MoodleController::class, 'unlock'])->name('moodle.unlock');
