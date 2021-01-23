@@ -42,6 +42,6 @@ Route::get('links/{item}',              [LinkController::class, 'modal'])->name(
 Route::get('links',                     [LinkController::class, 'index'])->name('links.index');
 
 //Rotas Moodle
-Route::get('moodle/index',              [MoodleController::class, 'index'])->name('moodle.index');
+Route::get('moodle/index',              [MoodleController::class, 'viewReports'])->name('moodle.index');
 Route::get('moodle/lock',               [MoodleController::class, 'lock'])->name('moodle.lock');
 Route::get('moodle/unlock',             [MoodleController::class, 'unlock'])->name('moodle.unlock');

@@ -4,16 +4,10 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use DateTimeZone;
-use Exception;
 use Illuminate\Support\Facades\DB;
 
 class MoodleController extends Controller
 {
-    public function index()
-    {
-        return view('painel-admin.moodle.index');
-    }
-
     public function service($id_suspended, $userid)
     {
         try {
@@ -41,9 +35,8 @@ class MoodleController extends Controller
 
                 $this->reports($userid, $username, $email, $institution, $firstname, $lastname);
             }
-            
-            return redirect()->route('moodle.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
 
+            return redirect()->route('moodle.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
             return redirect()->route('moodle.index')->with('error', utf8_encode('Erro desconhecido!'));
         }
@@ -51,22 +44,12 @@ class MoodleController extends Controller
 
     public function lock()
     {
-        try {
-            $this->service(1, 1);
-            return redirect()->route('moodle.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
-        } catch (\Throwable $th) {
-            return redirect()->route('moodle.index')->with('error', utf8_encode('Erro desconhecido!'));
-        }
+        return $this->service(1, 1);
     }
 
     public function unlock()
     {
-        try {
-            $this->service(0, 0);
-            return redirect()->route('moodle.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
-        } catch (\Throwable $th) {
-            return redirect()->route('moodle.index')->with('error', utf8_encode('Erro desconhecido!'));
-        }
+        return $this->service(0, 0);
     }
 
     public function reports($userid, $username, $email, $institution, $firstname, $lastname)
@@ -94,7 +77,7 @@ class MoodleController extends Controller
 
             ]);
         } catch (\Throwable $th) {
-            throw new Exception("Falha ao realizar a operação!");
+            throw $th;
         }
     }
 
@@ -111,7 +94,7 @@ class MoodleController extends Controller
 
             return view('painel-admin.moodle.index', ['results' => $results]);
         } catch (\Throwable $th) {
-            return view('erro');
+            return redirect()->route('admin.index')->with('error', utf8_encode('Erro desconhecido!'));
         }
     }
 }

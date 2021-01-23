@@ -7,10 +7,10 @@
 <script src="{{ URL::asset('vendor/datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.js') }}"></script>
 <script src="{{ URL::asset('vendor/datatables/jszip.min.js') }}"></script>
-<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="{{ URL::asset('vendor/datatables/buttons.html5.min.js') }}"></script>
 <script src="{{ URL::asset('vendor/datatables/buttons.print.min.js') }}"></script>
+<script src="{{ URL::asset('vendor/datatables/moment.min.js') }}"></script>
+<script src="{{ URL::asset('vendor/datatables/datetime-moment.js') }}"></script>
 
 <?php
 @session_start();
@@ -57,14 +57,15 @@ if (!isset($id)) {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>username</td>
-                  <td>firstname</td>
-                  <td>email </td>
-                  <td>userid</td>
-                  <td>time</td>
-                  <td>institution</td>
-                </tr>
+                @for($i=0; $i < count($results); $i++) <tr>
+                  <td>{{$results[$i]->username}}</td>
+                  <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
+                  <td>{{$results[$i]->email}} </td>
+                  <td>{{$results[$i]->userid == 1 ? "Bloqueado" : "Desbloqueado"}}</td>
+                  <td>{{$results[$i]->time}}</td>
+                  <td>{{$results[$i]->institution == "" ? "Cadastro incompleto" : $results[$i]->institution}}</td>
+                  </tr>
+                  @endfor
               </tbody>
             </table>
           </div>
@@ -75,17 +76,17 @@ if (!isset($id)) {
 </div>
 
 <script>
+  // Cria um formato de data pt-br para ser utilizada no datatable.
+  $.fn.dataTable.moment('DD/MM/YYYY HH:mm:ss');
+
   var table = $('#results-table').DataTable({
     responsive: true,
-    ordering: false,
+    order: [
+                [4, "desc"]
+            ],
     buttons: [{
         extend: 'excel',
         text: 'Excel',
-        className: 'btn-sm',
-      },
-      {
-        extend: 'pdf',
-        text: 'Pdf',
         className: 'btn-sm',
       },
       {
