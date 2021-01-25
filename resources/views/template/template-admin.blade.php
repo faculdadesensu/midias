@@ -150,7 +150,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#ModalPerfil">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ModalPerfil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
                                     Editar Perfil
                                 </a>

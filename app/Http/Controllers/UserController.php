@@ -110,13 +110,15 @@ class UserController extends Controller
 
     public function editar(Request $request, User $item)
     {
+        dd($request);
         try {
             $item->name        = $request->name;
             $item->username    = $request->username;
             $item->email       = $request->email;
             $item->username    = $request->username;
+            $item->password    = $request->password;
             $oldUsername       = $request->oldUsername;
-
+ 
             if ($oldUsername != $request->username) {
                 $check = User::where('username', '=', $request->username)->count();
                 if ($check > 0) {
