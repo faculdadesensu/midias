@@ -76,7 +76,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
             <div class="sidebar-heading">
                 Cadastros
             </div>
-
+            @if ($_SESSION['level'] == 'admin')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-users"></i>
@@ -87,8 +87,9 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                         <a class="collapse-item" href="{{ route('users.index')}}">Usuários</a>
                     </div>
                 </div>
+               
             </li>
-
+            @endif
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -98,14 +99,13 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('links.index')}}">Links</a>
-
                     </div>
                 </div>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
+            @if ($_SESSION['level'] == 'admin')
+                <!-- Heading -->
             <div class="sidebar-heading">
                 MOODLE
             </div>
@@ -122,6 +122,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
 
                 </div>
             </li>
+            @endif
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -142,6 +143,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div align="right" class="mr-2">v1.0</div>
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$usuario[0]->name}}</span>
                                 <img class="img-profile rounded-circle" src="{{ URL::asset('img/sem-foto.jpg') }}">
 
@@ -152,7 +154,6 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
                                     Editar Perfil
                                 </a>
-
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('users.logout')}}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
@@ -160,9 +161,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 

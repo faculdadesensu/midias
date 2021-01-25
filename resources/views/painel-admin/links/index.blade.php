@@ -3,7 +3,7 @@
 @section('content')
 <?php 
 @session_start();
-if(@$_SESSION['level'] != 'admin'){ 
+if(@$_SESSION['level'] != 'admin' && @$_SESSION['level'] != 'user'){ 
   echo "<script language='javascript'> window.location='./' </script>";
 }
 if(!isset($id)){

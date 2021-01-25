@@ -22,7 +22,7 @@ class UserController extends Controller
                 $_SESSION['user_name'] = $users->name;
                 $_SESSION['level'] = $users->level;
 
-                if ($_SESSION['level'] == 'admin') {
+                if ($_SESSION['level'] == 'admin' || $_SESSION['level'] == 'user' ) {
                     return view('painel-admin.index');
                 }
             } else {
