@@ -86,7 +86,8 @@ class UserController extends Controller
             $tabela->username    = $request->username;
             $tabela->email       = $request->email;
             $tabela->username    = $request->username;
-            $tabela->level       = 'admin';
+            $tabela->level       = $request->level;
+            $tabela->password    = $request->password;
 
             $check = User::where('username', '=', $request->username)->count();
             if ($check > 0) {
@@ -114,7 +115,7 @@ class UserController extends Controller
             $item->username    = $request->username;
             $item->email       = $request->email;
             $item->username    = $request->username;
-            $oldUsername           = $request->oldUsername;
+            $oldUsername       = $request->oldUsername;
 
             if ($oldUsername != $request->username) {
                 $check = User::where('username', '=', $request->username)->count();
