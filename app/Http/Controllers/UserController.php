@@ -110,7 +110,6 @@ class UserController extends Controller
 
     public function editar(Request $request, User $item)
     {
-        dd($request);
         try {
             $item->name        = $request->name;
             $item->username    = $request->username;
