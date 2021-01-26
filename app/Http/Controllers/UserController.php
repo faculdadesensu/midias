@@ -27,11 +27,11 @@ class UserController extends Controller
                 }
             } else {
                 echo "<script language='javascript'> window.alert('Dados Incorretos!') </script>";
-                return view('index');
+                return view('login.index');
             }
         } catch (\Throwable $th) {
             echo "<script language='javascript'> window.alert('Erro desconhecido!') </script>";
-            return view('index');
+            return view('login.index');
         }
     }
 
