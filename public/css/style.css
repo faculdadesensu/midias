@@ -1,5 +1,3 @@
-
-
 /* Sobreposição de estilo da side-bar -------*/
 
 .bg-gradient-primary {
@@ -11,14 +9,35 @@
 /*-----------------------------------------*/
 
 /*Define uma posição padrão para as mensagens de retorno*/
-.alert-position{
+
+.alert-position {
    position: absolute;
    top: 15px;
    right: 15px;
- }
+}
 
- @media(max-width: 767px) {
-   .btn-margin-responsive{
+/*Adiciona uma margem para que botões não fiquem grudados no layout mobile*/
+
+@media(max-width: 767px) {
+   .btn-margin-responsive {
       margin-bottom: 10px;
    }
- }
+}
+
+/*Customizações de botões de impressão dos datatables -------------*/
+
+/*Adiciona um espaço na lateral para que os botões ocupem o mesmo espaçamento*/
+
+@media(max-width: 767px) {
+   .buttons-excel {
+      padding: 0 20px !important;
+   }
+}
+
+/*Adiciona uma linha para diferenciar os dois botões*/
+
+.buttons-print {
+   border-left: 1px solid white !important;
+}
+
+/*-----------------------------------------------------------------*/

@@ -26,11 +26,11 @@ if (!isset($id)) {
   <div class="card shadow mb-4">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-6 d-flex justify-content-center">
-          <a type="button" href="{{route('moodle.lock')}}" class="btn btn-sm btn-primary btn-margin-responsive">Bloquear Professores</a>
+        <div class="col-md-6 d-flex justify-content-center btn-group">
+          <a type="button" href="{{route('moodle.lock')}}" class="btn btn-sm btn-primary btn-margin-responsive">Bloquear</a>
         </div>
-        <div class="col-md-6 d-flex justify-content-center">
-          <a type="button" href="{{route('moodle.unlock')}}" class="btn btn-sm btn-primary">Desbloquear Professores</a>
+        <div class="col-md-6 d-flex justify-content-center btn-group">
+          <a type="button" href="{{route('moodle.unlock')}}" class="btn btn-sm btn-primary">Desbloquear</a>
         </div>
       </div>
       <hr>
@@ -79,8 +79,8 @@ if (!isset($id)) {
   var table = $('#results-table').DataTable({
     responsive: true,
     order: [
-                [4, "desc"]
-            ],
+      [4, "desc"]
+    ],
     buttons: [{
         extend: 'excel',
         text: 'Excel',
