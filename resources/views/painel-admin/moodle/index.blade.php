@@ -34,14 +34,12 @@ if (!isset($id)) {
         </div>
       </div>
       <hr>
-
       <br>
       <div class="row">
         <div class="col-12" id="position-buttons">
         </div>
       </div>
       <br>
-
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">
