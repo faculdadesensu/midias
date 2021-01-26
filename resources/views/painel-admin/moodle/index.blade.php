@@ -27,14 +27,13 @@ if (!isset($id)) {
     <div class="card-body">
       <div class="row">
         <div class="col-md-6 d-flex justify-content-center">
-          <a type="button" href="{{route('moodle.lock')}}" class="btn btn-sm btn-primary">Bloquear Professores</a>
+          <a type="button" href="{{route('moodle.lock')}}" class="btn btn-sm btn-primary btn-margin-responsive">Bloquear Professores</a>
         </div>
         <div class="col-md-6 d-flex justify-content-center">
           <a type="button" href="{{route('moodle.unlock')}}" class="btn btn-sm btn-primary">Desbloquear Professores</a>
         </div>
       </div>
       <hr>
-      <br>
       <div class="row">
         <div class="col-12" id="position-buttons">
         </div>
