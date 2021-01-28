@@ -49,7 +49,7 @@ class MoodleController extends Controller
 
             for ($i = 0; $i < count($count2); $i++) {
                 $id = $count2[$i];
-                
+
                 DB::connection('mysql3')->update('update mdl_user set suspended = ' . $id_suspended . ' where id =' . $id . '');
                 $user2 = DB::connection('mysql3')->select('select firstname, lastname, username, email, institution from mdl_user where id = ' . $id . '');
 
@@ -59,7 +59,6 @@ class MoodleController extends Controller
                 $email2          = $user2[0]->email;
                 $institution2    = $user2[0]->institution;
 
-                $this->reports($userid, $username, $email, $institution, $firstname, $lastname);
                 $this->reports($userid, $username2, $email2, $institution2, $firstname2, $lastname2);
             }
 
