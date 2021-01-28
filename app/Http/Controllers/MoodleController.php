@@ -50,13 +50,14 @@ class MoodleController extends Controller
                 $id = $count2[$i];
                 DB::connection('mysql2')->update('update mdl_user set suspended = ' . $id_suspended . ' where id =' . $id . '');
                 $user2 = DB::connection('mysql2')->select('select firstname, lastname, username, email, institution from mdl_user where id = ' . $id . '');
-                $firstname      = $user2[0]->firstname;
-                $lastname       = $user2[0]->lastname;
-                $username       = $user2[0]->username;
-                $email          = $user2[0]->email;
-                $institution    = $user2[0]->institution;
+                $firstname2      = $user2[0]->firstname;
+                $lastname2      = $user2[0]->lastname;
+                $username2       = $user2[0]->username;
+                $email2          = $user2[0]->email;
+                $institution2    = $user2[0]->institution;
 
                 $this->reports($userid, $username, $email, $institution, $firstname, $lastname);
+                $this->reports($userid, $username2, $email2, $institution2, $firstname2, $lastname2);
             }
 
             return redirect()->route('moodle.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
