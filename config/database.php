@@ -80,11 +80,11 @@ return [
 
         'mysql3' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST_MYSQL2', '127.0.0.1'),
+            'host' => env('DB_HOST_MYSQL2', 'moodlesql2020-0.cr02k4fe7zh9.us-east-1.rds.amazonaws.com'),
             'port' => env('DB_PORT_MYSQL2', '3306'),
-            'database' => env('DB_DATABASE_MYSQL2', 'db_moodle'),
-            'username' => env('DB_USERNAME_MYSQL2', 'root'),
-            'password' => env('DB_PASSWORD_MYSQL2', 'root'),
+            'database' => env('DB_DATABASE_MYSQL2', 'eadsu_fac2019-1'),
+            'username' => env('DB_USERNAME_MYSQL2', 'fazeadmdl200'),
+            'password' => env('DB_PASSWORD_MYSQL2', '#1senSu2020avaeada0'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
