@@ -64,6 +64,19 @@ class MoodleController extends Controller
                 $this->reports($userid, $username2, $email2, $institution2, $firstname2, $lastname2);
             }
 
+            if($id_suspended == 0){
+                $list = ListIgnore::orderby('id', 'desc')->get();
+
+                foreach ($list as $value) {
+                    if ($value->moodle == 'A') {
+                        DB::connection('mysql2')->update('update mdl_user set suspended = 0 where id =' . $value->id_user . '');
+                    } else {
+                        DB::connection('mysql3')->update('update mdl_user set suspended = 0 where id =' . $value->id_user . '');
+                    }
+                   
+                }
+            }
+        
             return redirect()->route('moodle.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
             return redirect()->route('moodle.index')->with('error', utf8_encode('Erro desconhecido!'));
