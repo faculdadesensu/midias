@@ -126,11 +126,17 @@ class MoodleController extends Controller
         }
     }
 
-    public function listIgnore(){
+    public function listIgnoreA(){
        
        $users = DB::connection('mysql2')->select('select id, username, firstname, lastname, email from mdl_user');
 
-       return view('painel-admin.moodle.users', ['results' => $users]);
+       return view('painel-admin.moodle.users', ['results' => $users, 'moodle' => 'A']);
+    }
+    public function listIgnoreB(){
+       
+       $users = DB::connection('mysql3')->select('select id, username, firstname, lastname, email from mdl_user');
+
+       return view('painel-admin.moodle.users', ['results' => $users, 'moodle' => 'B']);
     }
 
     public function addIgnore(Request $request){
@@ -142,13 +148,14 @@ class MoodleController extends Controller
         $list->firstname = $request->firstname;
         $list->lastname = $request->lastname;
         $list->email = $request->email;
+        $list->moodle = $request->moodle;
 
         $list->save();
 
         
         $users = DB::connection('mysql2')->select('select id, username, firstname, lastname, email from mdl_user');
 
-        return view('painel-admin.moodle.users', ['results' => $users]);
+        return view('painel-admin.moodle.users', ['results' => $users, 'moodle' => $request->moodle]);
     }
 
     public function list(){

@@ -50,6 +50,7 @@ if (!isset($id)) {
                   <input type="hidden" name="firstname" value="{{$results[$i]->firstname}}">
                   <input type="hidden" name="lastname" value="{{$results[$i]->lastname}}">
                   <input type="hidden" name="email" value="{{$results[$i]->email}}">
+                  <input type="hidden" name="moodle" value="{{$moodle}}">
                   <button title="Adicionar na lista"  class="btn btn-primary" type="submit">Adicionar</button>
                   
                 </form>                                  

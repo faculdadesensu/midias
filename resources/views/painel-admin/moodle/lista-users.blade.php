@@ -21,6 +21,10 @@ if (!isset($id)) {
   $id = "";
 }
 ?>
+<h2 class="mb-4"><i>Lista de usuários que serão ignorados no bloqueio</i></h2>
+
+<a href="{{route('moodle.listA')}}" type="button" class=" mb-3 btn btn-primary">Adicionar Novo - Moodle A</a>
+<a href="{{ route('moodle.listB')}}" type="button" class="mb-3 btn btn-primary">Adcionar Novo - Moodle B</a>
 
 <div class="card shadow mb-4">
   <div class="card-body">
@@ -32,6 +36,7 @@ if (!isset($id)) {
               <th>ID</th>
               <th>Usuário</th>
               <th>E-mail</th>
+              <th>Moodle</th>
               <th>Ações</th>
             </tr>
         </thead>
@@ -42,11 +47,12 @@ if (!isset($id)) {
               <td>{{$results[$i]->id_user}}</td>
               <td>{{$results[$i]->username}}</td>
               <td>{{$results[$i]->email}} </td>
+              <td>{{$results[$i]->moodle}} </td>
               <td>
                 <form action="{{route('moodle.delete', $results[$i]->id)}}" method="post">
                   @csrf
                   @method('delete')
-                  <button title="Adicionar na lista" class="btn btn-primary" type="submit">Excluir</button>  
+                  <button title="Adicionar na lista" class="btn btn-primary" type="submit">Excluir</button>
                 </form>
             </td>
           </tr>
