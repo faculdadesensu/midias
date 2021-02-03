@@ -144,7 +144,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div align="right" class="mr-2">v1.0</div>
+                                <div align="right" class="mr-2">v1.1</div>
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$usuario[0]->name}}</span>
                                 <img class="img-profile rounded-circle" src="{{ URL::asset('img/sem-foto.jpg') }}">
 

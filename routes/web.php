@@ -47,6 +47,6 @@ Route::get('moodle/lock',                               [MoodleController::class
 Route::get('moodle/unlock',                             [MoodleController::class, 'unlock'])->name('moodle.unlock');
 Route::get('moodle/lista-usuarios/a',                   [MoodleController::class, 'listIgnoreA'])->name('moodle.listA');
 Route::get('moodle/lista-usuarios/b',                   [MoodleController::class, 'listIgnoreB'])->name('moodle.listB');
-Route::get('moodle/lista-usuarios/agnorados',           [MoodleController::class, 'list'])->name('moodle.ignorados');
+Route::get('moodle/lista-usuarios/ignorados',           [MoodleController::class, 'list'])->name('moodle.ignorados');
 Route::delete('moodle/lista-usuarios/deletar/{id}',     [MoodleController::class, 'listDelete'])->name('moodle.delete');
 Route::get('moodle/adcionar-ignore/',                   [MoodleController::class, 'addIgnore'])->name('moodle.add');
