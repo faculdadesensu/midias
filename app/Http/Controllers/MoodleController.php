@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListIgnore;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MoodleController extends Controller
@@ -123,4 +125,50 @@ class MoodleController extends Controller
             return redirect()->route('admin.index')->with('error', utf8_encode('Erro desconhecido!'));
         }
     }
+
+    public function listIgnore(){
+       
+       $users = DB::connection('mysql2')->select('select id, username, firstname, lastname, email from mdl_user');
+
+       return view('painel-admin.moodle.users', ['results' => $users]);
+    }
+
+    public function addIgnore(Request $request){
+       
+        $list = new ListIgnore();
+
+        $list->id_user = $request->user_id;
+        $list->username = $request->username;
+        $list->firstname = $request->firstname;
+        $list->lastname = $request->lastname;
+        $list->email = $request->email;
+
+        $list->save();
+
+        
+        $users = DB::connection('mysql2')->select('select id, username, firstname, lastname, email from mdl_user');
+
+        return view('painel-admin.moodle.users', ['results' => $users]);
+    }
+
+    public function list(){
+
+        $list = ListIgnore::orderby('id', 'desc')->get();
+
+        return view('painel-admin.moodle.lista-users', ['results' => $list]);
+    }
+
+    public function listDelete($id){
+
+        $item = ListIgnore::find($id);
+        
+       $item->delete();
+
+      
+        $list = ListIgnore::orderby('id', 'desc')->get();
+
+        return view('painel-admin.moodle.lista-users', ['results' => $list]);
+    }
+
+
 }

@@ -118,6 +118,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                 <div id="collapseOperacoes" class="collapse" aria-labelledby="headingOperacoes" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('moodle.index')}}">Bloqueio/Desbloqueio</a>
+                        <a class="collapse-item" href="{{ route('moodle.ignorados')}}">Lista de liberações</a>
                     </div>
 
                 </div>

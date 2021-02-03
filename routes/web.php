@@ -42,6 +42,10 @@ Route::get('links/{item}',              [LinkController::class, 'modal'])->name(
 Route::get('links',                     [LinkController::class, 'index'])->name('links.index');
 
 //Rotas Moodle
-Route::get('moodle',              [MoodleController::class, 'viewReports'])->name('moodle.index');
-Route::get('moodle/lock',               [MoodleController::class, 'lock'])->name('moodle.lock');
-Route::get('moodle/unlock',             [MoodleController::class, 'unlock'])->name('moodle.unlock');
+Route::get('moodle',                                    [MoodleController::class, 'viewReports'])->name('moodle.index');
+Route::get('moodle/lock',                               [MoodleController::class, 'lock'])->name('moodle.lock');
+Route::get('moodle/unlock',                             [MoodleController::class, 'unlock'])->name('moodle.unlock');
+Route::get('moodle/lista-usuarios',                     [MoodleController::class, 'listIgnore'])->name('moodle.list');
+Route::get('moodle/lista-usuarios/agnorados',           [MoodleController::class, 'list'])->name('moodle.ignorados');
+Route::delete('moodle/lista-usuarios/deletar/{id}',     [MoodleController::class, 'listDelete'])->name('moodle.delete');
+Route::get('moodle/adcionar-ignore/',                   [MoodleController::class, 'addIgnore'])->name('moodle.add');

@@ -48,7 +48,6 @@ if (!isset($id)) {
                   <th>Usuário</th>
                   <th>Nome</th>
                   <th>E-mail</th>
-                  <th>Operação realizada</th>
                   <th>Hora do bloqueio/desbloqueio</th>
                   <th>Instituição</th>
                 </tr>
@@ -58,7 +57,6 @@ if (!isset($id)) {
                   <td>{{$results[$i]->username}}</td>
                   <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
                   <td>{{$results[$i]->email}} </td>
-                  <td>{{$results[$i]->userid == 1 ? "Bloqueado" : "Desbloqueado"}}</td>
                   <td>{{$results[$i]->time}}</td>
                   <td>{{$results[$i]->institution == "" ? "Cadastro incompleto" : $results[$i]->institution}}</td>
                   </tr>
