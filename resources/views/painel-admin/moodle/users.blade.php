@@ -21,7 +21,8 @@ if (!isset($id)) {
   $id = "";
 }
 ?>
-
+<h2 class="mb-4"><i>Lista de usuários cadastrados no Moodle {{$moodle}}</i></h2>
+<a href="{{ route('moodle.ignorados')}}" type="button" class="mb-3 btn btn-primary">Voltar para lista</a>
 <div class="card shadow mb-4">
   <div class="card-body">
   <div class="table-responsive">
@@ -29,7 +30,6 @@ if (!isset($id)) {
         <thead>
             <tr>
               <th>Nome</th>
-              <th>ID</th>
               <th>Usuário</th>
               <th>E-mail</th>
               <th>Ações</th>
@@ -39,7 +39,6 @@ if (!isset($id)) {
         @for($i=0; $i < count($results); $i++) 
           <tr>
             <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
-              <td>{{$results[$i]->id}}</td>
               <td>{{$results[$i]->username}}</td>
               <td>{{$results[$i]->email}} </td>
               <td>

@@ -33,7 +33,6 @@ if (!isset($id)) {
         <thead>
             <tr>
               <th>Nome</th>
-              <th>ID</th>
               <th>Usuário</th>
               <th>E-mail</th>
               <th>Moodle</th>
@@ -44,7 +43,6 @@ if (!isset($id)) {
         @for($i=0; $i < count($results); $i++) 
           <tr>
               <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
-              <td>{{$results[$i]->id_user}}</td>
               <td>{{$results[$i]->username}}</td>
               <td>{{$results[$i]->email}} </td>
               <td>{{$results[$i]->moodle}} </td>

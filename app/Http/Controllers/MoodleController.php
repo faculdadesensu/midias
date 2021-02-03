@@ -25,7 +25,7 @@ class MoodleController extends Controller
                     $count[] = $result[$i]->userid;
                 }
             }
-
+          
             for ($i = 0; $i < count($count); $i++) {
                 $id = $count[$i];
                 DB::connection('mysql2')->update('update mdl_user set suspended = ' . $id_suspended . ' where id =' . $id . '');
@@ -44,16 +44,16 @@ class MoodleController extends Controller
             $count2 = [];
 
             for ($i = 0; $i < count($result2); $i++) {
-                if (!in_array($result2[$i]->userid, $count)) {
-                    $count2[] = $result2[$i]->userid;
+                if (!in_array($result2[$i]->userid, $count2)) {
+                    $count2[] =  $result2[$i]->userid;
                 }
             }
 
             for ($i = 0; $i < count($count2); $i++) {
-                $id = $count2[$i];
+                $id2 = $count2[$i];
 
-                DB::connection('mysql3')->update('update mdl_user set suspended = ' . $id_suspended . ' where id =' . $id . '');
-                $user2 = DB::connection('mysql3')->select('select firstname, lastname, username, email, institution from mdl_user where id = ' . $id . '');
+                DB::connection('mysql3')->update('update mdl_user set suspended = ' . $id_suspended . ' where id =' . $id2 . '');
+                $user2 = DB::connection('mysql3')->select('select firstname, lastname, username, email, institution from mdl_user where id = ' . $id2 . '');
 
                 $firstname2      = $user2[0]->firstname;
                 $lastname2       = $user2[0]->lastname;
@@ -64,7 +64,7 @@ class MoodleController extends Controller
                 $this->reports($userid, $username2, $email2, $institution2, $firstname2, $lastname2);
             }
 
-            if($id_suspended == 0){
+            if($id_suspended != 0){
                 $list = ListIgnore::orderby('id', 'desc')->get();
 
                 foreach ($list as $value) {
