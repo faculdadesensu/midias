@@ -52,16 +52,6 @@ if (!isset($id)) {
                   <th>Instituição</th>
                 </tr>
               </thead>
-              <tbody>
-                @for($i=0; $i < count($results); $i++) <tr>
-                  <td>{{$results[$i]->username}}</td>
-                  <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
-                  <td>{{$results[$i]->email}} </td>
-                  <td>{{$results[$i]->time}}</td>
-                  <td>{{$results[$i]->institution == "" ? "Cadastro incompleto" : $results[$i]->institution}}</td>
-                  </tr>
-                  @endfor
-              </tbody>
             </table>
           </div>
         </div>
@@ -75,35 +65,80 @@ if (!isset($id)) {
   $.fn.dataTable.moment('DD/MM/YYYY HH:mm:ss');
 
   var table = $('#results-table').DataTable({
-    responsive: true,
-    order: [
-      [4, "desc"]
+    "responsive": true,
+    "processing": true,
+    "serverSide": true,
+    "autoWidth": true,
+    "ajax": "{{route('moodle.index')}}",
+    "order": [
+      [3, "desc"]
     ],
-    buttons: [{
-        extend: 'excel',
-        text: 'Excel',
-        className: 'btn-sm',
+    "buttons": [{
+        "extend": 'excel',
+        "text": 'Excel',
+        "className": 'btn-sm',
       },
       {
-        extend: 'print',
-        text: 'Imprimir',
-        className: 'btn-sm',
+        "extend": 'print',
+        "text": 'Imprimir',
+        "className": 'btn-sm',
       },
     ],
-    language: {
-      search: "Buscar:",
-      lengthMenu: "Mostrar _MENU_ Registros",
-      zeroRecords: "Nenhum registro encontrado",
-      info: "Mostrar _PAGE_ de _PAGES_ de _TOTAL_ Registros",
-      infoEmpty: "Nenhum registro disponível",
-      infoFiltered: "(filtrando de _MAX_ resultados)",
-      loadingRecords: "Carregando...",
-      processing: "Processando...",
-      paginate: {
-        next: "Próxima",
-        previous: "Anterior"
+    "language": {
+      "search": "Buscar:",
+      "lengthMenu": "Mostrar _MENU_ Registros",
+      "zeroRecords": "Nenhum registro encontrado",
+      "info": "Mostrar _PAGE_ de _PAGES_ de _TOTAL_ Registros",
+      "infoEmpty": "Nenhum registro disponível",
+      "infoFiltered": "(filtrando de _MAX_ resultados)",
+      "loadingRecords": "Carregando...",
+      "processing": "Processando...",
+      "paginate": {
+        "next": "Próxima",
+        "previous": "Anterior"
       },
-    }
+    },
+
+    "columns": [{
+        "data": "username",
+        "name": "username",
+      },
+      {
+        "data": function(data) {
+          return data.firstname + " " + data.lastname;
+        },
+        "name": "nome",
+      },
+      {
+        "data": "email",
+        "name": "email",
+      },
+      {
+        "data": "time",
+        "name": "time",
+        "render": function(data, type, row) {
+          return moment(data).format('DD/MM/YYYY HH:mm:ss');
+        },
+      },
+      {
+        "data": function(data) {
+          if (data.institution === "" || data.institution === null) {
+            return "Cadastro incompleto";
+          } else {
+            return data.institution;
+          }
+        },
+        "name": "institution",
+      }
+    ],
+    "initComplete": function() {
+      var input = $('.dataTables_filter input').unbind();
+      self = this.api();
+      $searchButton = $('<button class="btn btn-sm btn-primary ml-2"><i class="fas fa-search">').click(function() {
+        self.search(input.val()).draw();
+      });
+      $('.dataTables_filter').append($searchButton);
+    },
   });
   table.buttons().containers().appendTo('#position-buttons');
 </script>
