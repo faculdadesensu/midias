@@ -35,20 +35,20 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}?{{$version}}"></script>
+    <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}?{{$version}}"></script>
 
     <link rel="shortcut icon" href="{{ URL::asset('img/logo_sig.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ URL::asset('img/logo_sig.png') }}" type="image/x-icon">
 
     <!-- Page level plugins -->
-    <script src="{{ URL::asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('vendor/datatables/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/datatables/jquery.dataTables.min.js') }}?{{$version}}"></script>
+    <script src="{{ URL::asset('vendor/datatables/dataTables.bootstrap4.min.js') }}?{{$version}}"></script>
+    <script src="{{ URL::asset('vendor/datatables/dataTables.responsive.min.js') }}?{{$version}}"></script>
+    <script src="{{ URL::asset('vendor/datatables/responsive.bootstrap4.min.js') }}?{{$version}}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ URL::asset('js/demo/datatables-demo.js') }}"></script>
+    <script src="{{ URL::asset('js/demo/datatables-demo.js') }}?{{$version}}"></script>
 
 </head>
 
@@ -144,7 +144,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div align="right" class="mr-2">v1.1</div>
+                                <div align="right" class="mr-2">v{{ $version }}</div>
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$usuario[0]->name}}</span>
                                 <img class="img-profile rounded-circle" src="{{ URL::asset('img/sem-foto.jpg') }}">
 
@@ -254,20 +254,20 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
 
 
     <!-- Core plugin JavaScript-->
-    <script src="{{ URL::asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/jquery-easing/jquery.easing.min.js') }}?{{$version}}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ URL::asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ URL::asset('js/sb-admin-2.min.js') }}?{{$version}}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ URL::asset('vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ URL::asset('vendor/chart.js/Chart.min.js') }}?{{$version}}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ URL::asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ URL::asset('js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ URL::asset('js/demo/chart-area-demo.js') }}?{{$version}}"></script>
+    <script src="{{ URL::asset('js/demo/chart-pie-demo.js') }}?{{$version}}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
-    <script src="{{ URL::asset('js/mascaras.js') }}"></script>
+    <script src="{{ URL::asset('js/mascaras.js') }}?{{$version}}"></script>
 </body>
 
 </html>

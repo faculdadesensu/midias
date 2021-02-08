@@ -4,13 +4,13 @@
 
 <link href="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet">
 
-<script src="{{ URL::asset('vendor/datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/jszip.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.print.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/moment.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/datetime-moment.js') }}"></script>
+<script src="{{ URL::asset('vendor/datatables/dataTables.buttons.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/jszip.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/buttons.html5.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/buttons.print.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/moment.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/datetime-moment.js') }}?{{$version}}"></script>
 
 <?php
 @session_start();

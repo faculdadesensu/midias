@@ -4,13 +4,13 @@
 
 <link href="<?php echo e(URL::asset('vendor/datatables/buttons.bootstrap4.min.css')); ?>" rel="stylesheet">
 
-<script src="<?php echo e(URL::asset('vendor/datatables/dataTables.buttons.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('vendor/datatables/buttons.bootstrap4.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('vendor/datatables/jszip.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('vendor/datatables/buttons.html5.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('vendor/datatables/buttons.print.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('vendor/datatables/moment.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('vendor/datatables/datetime-moment.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/dataTables.buttons.min.js')); ?>?<?php echo e($version); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.bootstrap4.min.js')); ?>?<?php echo e($version); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/jszip.min.js')); ?>?<?php echo e($version); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.html5.min.js')); ?>?<?php echo e($version); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.print.min.js')); ?>?<?php echo e($version); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/moment.min.js')); ?>?<?php echo e($version); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/datetime-moment.js')); ?>?<?php echo e($version); ?>"></script>
 
 <?php
 @session_start();
