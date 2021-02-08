@@ -7,6 +7,7 @@ use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class MoodleController extends Controller
 {
@@ -17,15 +18,15 @@ class MoodleController extends Controller
             $id_suspended   = $id_suspended;
 
             $result         = DB::connection('mysql2')->select('select userid from mdl_role_assignments where roleid in (2, 3, 4)');
-           
+
             $count = [];
-           
+
             for ($i = 0; $i < count($result); $i++) {
                 if (!in_array($result[$i]->userid, $count)) {
                     $count[] = $result[$i]->userid;
                 }
             }
-          
+
             for ($i = 0; $i < count($count); $i++) {
                 $id = $count[$i];
                 DB::connection('mysql2')->update('update mdl_user set suspended = ' . $id_suspended . ' where id =' . $id . '');
@@ -64,7 +65,7 @@ class MoodleController extends Controller
                 $this->reports($userid, $username2, $email2, $institution2, $firstname2, $lastname2);
             }
 
-            if($id_suspended != 0){
+            if ($id_suspended != 0) {
                 $list = ListIgnore::orderby('id', 'desc')->get();
 
                 foreach ($list as $value) {
@@ -73,10 +74,9 @@ class MoodleController extends Controller
                     } else {
                         DB::connection('mysql3')->update('update mdl_user set suspended = 0 where id =' . $value->id_user . '');
                     }
-                   
                 }
             }
-        
+
             return redirect()->route('moodle.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
             return redirect()->route('moodle.index')->with('error', utf8_encode('Erro desconhecido!'));
@@ -124,36 +124,36 @@ class MoodleController extends Controller
 
     public function viewReports()
     {
-        try {
+        if (request()->ajax()) {
             $results = DB::table('reports')->get();
-
-            foreach ($results as $result) {
-                $time = new DateTime($result->time);
-                $time2 = date_format($time, 'd/m/Y H:i:s');
-                $result->time = $time2;
-            }
-
-            return view('painel-admin.moodle.index', ['results' => $results]);
-        } catch (\Throwable $th) {
-            return redirect()->route('admin.index')->with('error', utf8_encode('Erro desconhecido!'));
+            return DataTables::of($results)->make(true);
         }
+
+        return view('painel-admin.moodle.index');
     }
 
-    public function listIgnoreA(){
-       
-       $users = DB::connection('mysql2')->select('select id, username, firstname, lastname, email from mdl_user');
+    public function listIgnoreA()
+    {
+        if (request()->ajax()) {
+            $users = DB::connection('mysql2')->select('select id, username, firstname, lastname, email from mdl_user');
+            return DataTables::of($users)->make(true);
+        }
 
-       return view('painel-admin.moodle.users', ['results' => $users, 'moodle' => 'A']);
+        return view('painel-admin.moodle.users', ['moodle' => 'A']);
     }
-    public function listIgnoreB(){
-       
-       $users = DB::connection('mysql3')->select('select id, username, firstname, lastname, email from mdl_user');
+    public function listIgnoreB()
+    {
+        if (request()->ajax()) {
+            $users = DB::connection('mysql3')->select('select id, username, firstname, lastname, email from mdl_user');
+            return DataTables::of($users)->make(true);
+        }
 
-       return view('painel-admin.moodle.users', ['results' => $users, 'moodle' => 'B']);
+        return view('painel-admin.moodle.users', ['moodle' => 'B']);
     }
 
-    public function addIgnore(Request $request){
-       
+    public function addIgnore(Request $request)
+    {
+
         $list = new ListIgnore();
 
         $list->id_user = $request->user_id;
@@ -165,30 +165,30 @@ class MoodleController extends Controller
 
         $list->save();
 
-        
+
         $users = DB::connection('mysql2')->select('select id, username, firstname, lastname, email from mdl_user');
 
         return view('painel-admin.moodle.users', ['results' => $users, 'moodle' => $request->moodle]);
     }
 
-    public function list(){
+    public function list()
+    {
 
         $list = ListIgnore::orderby('id', 'desc')->get();
 
         return view('painel-admin.moodle.lista-users', ['results' => $list]);
     }
 
-    public function listDelete($id){
+    public function listDelete($id)
+    {
 
         $item = ListIgnore::find($id);
-        
-       $item->delete();
 
-      
+        $item->delete();
+
+
         $list = ListIgnore::orderby('id', 'desc')->get();
 
         return view('painel-admin.moodle.lista-users', ['results' => $list]);
     }
-
-
 }

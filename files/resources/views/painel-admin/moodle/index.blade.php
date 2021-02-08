@@ -4,13 +4,13 @@
 
 <link href="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet">
 
-<script src="{{ URL::asset('vendor/datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/jszip.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.print.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/moment.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/datetime-moment.js') }}"></script>
+<script src="{{ URL::asset('vendor/datatables/dataTables.buttons.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/jszip.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/buttons.html5.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/buttons.print.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/moment.min.js') }}?{{$version}}"></script>
+<script src="{{ URL::asset('vendor/datatables/datetime-moment.js') }}?{{$version}}"></script>
 
 <?php
 @session_start();
@@ -52,16 +52,6 @@ if (!isset($id)) {
                   <th>Instituição</th>
                 </tr>
               </thead>
-              <tbody>
-                @for($i=0; $i < count($results); $i++) <tr>
-                  <td>{{$results[$i]->username}}</td>
-                  <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
-                  <td>{{$results[$i]->email}} </td>
-                  <td>{{$results[$i]->time}}</td>
-                  <td>{{$results[$i]->institution == "" ? "Cadastro incompleto" : $results[$i]->institution}}</td>
-                  </tr>
-                  @endfor
-              </tbody>
             </table>
           </div>
         </div>
@@ -75,37 +65,97 @@ if (!isset($id)) {
   $.fn.dataTable.moment('DD/MM/YYYY HH:mm:ss');
 
   var table = $('#results-table').DataTable({
-    responsive: true,
-    order: [
-      [4, "desc"]
+    "responsive": true,
+    "processing": true,
+    "serverSide": true,
+    "autoWidth": true,
+    "ajax": {
+      url: "{{route('moodle.index')}}",
+      error: function(data) {
+          alert("Erro desconhecido!");
+        },
+    },
+    "order": [
+      [3, "desc"]
     ],
-    buttons: [{
-        extend: 'excel',
-        text: 'Excel',
-        className: 'btn-sm',
+    "buttons": [{
+        "extend": 'excel',
+        "text": 'Excel',
+        "className": 'btn-sm',
       },
       {
-        extend: 'print',
-        text: 'Imprimir',
-        className: 'btn-sm',
+        "extend": 'print',
+        "text": 'Imprimir',
+        "className": 'btn-sm',
       },
     ],
-    language: {
-      search: "Buscar:",
-      lengthMenu: "Mostrar _MENU_ Registros",
-      zeroRecords: "Nenhum registro encontrado",
-      info: "Mostrar _PAGE_ de _PAGES_ de _TOTAL_ Registros",
-      infoEmpty: "Nenhum registro disponível",
-      infoFiltered: "(filtrando de _MAX_ resultados)",
-      loadingRecords: "Carregando...",
-      processing: "Processando...",
-      paginate: {
-        next: "Próxima",
-        previous: "Anterior"
+    "language": {
+      "search": "Buscar:",
+      "lengthMenu": "Mostrar _MENU_ Registros",
+      "zeroRecords": "Nenhum registro encontrado",
+      "info": "Mostrar _PAGE_ de _PAGES_ de _TOTAL_ Registros",
+      "infoEmpty": "Nenhum registro disponível",
+      "infoFiltered": "(filtrando de _MAX_ resultados)",
+      "loadingRecords": "Carregando...",
+      "processing": "Processando...",
+      "paginate": {
+        "next": "Próxima",
+        "previous": "Anterior"
       },
-    }
+    },
+
+    "columns": [{
+        "data": "username",
+        "name": "username",
+      },
+      {
+        "data": function(data) {
+          return data.firstname + " " + data.lastname;
+        },
+        "name": "nome",
+      },
+      {
+        "data": "email",
+        "name": "email",
+      },
+      {
+        "data": "time",
+        "name": "time",
+        "render": function(data, type, row) {
+          return moment(data).format('DD/MM/YYYY HH:mm:ss');
+        },
+      },
+      {
+        "data": function(data) {
+          if (data.institution === "" || data.institution === null) {
+            return "Cadastro incompleto";
+          } else {
+            return data.institution;
+          }
+        },
+        "name": "institution",
+      }
+    ],
+    "initComplete": function() {
+      var input = $('.dataTables_filter input').unbind();
+      self = this.api();
+
+      // Realiza a pesquisa sempre que pressionado Enter dentro do input de pesquisa. 
+      $('.dataTables_filter input').keyup(function(e) {
+        if (e.keyCode == 13) {
+          self.search($(this).val()).draw();
+        }
+      });
+
+      // Cria o botão de pesquisa com a função respectiva.
+      $searchButton = $('<button class="btn btn-sm btn-primary ml-2" style="margin-top: -1px;"><i class="fas fa-search">').click(function() {
+        self.search(input.val()).draw();
+      });
+
+      // Adiciona o botão de pesquisa ao filtro da tabela 
+      $('.dataTables_filter').append($searchButton);
+    },
   });
-  table.buttons().containers().appendTo('#position-buttons');
 </script>
 
 @endsection
