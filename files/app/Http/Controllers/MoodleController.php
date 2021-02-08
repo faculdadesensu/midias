@@ -124,16 +124,12 @@ class MoodleController extends Controller
 
     public function viewReports()
     {
-        try {
-            if (request()->ajax()) {
-                $results = DB::table('reports')->get();
-                return DataTables::of($results)->make(true);
-            }
-
-            return view('painel-admin.moodle.index');
-        } catch (\Throwable $th) {
-            return redirect()->route('admin.index')->with('error', utf8_encode('Erro desconhecido!'));
+        if (request()->ajax()) {
+            $results = DB::table('reports')->get();
+            return DataTables::of($results)->make(true);
         }
+
+        return view('painel-admin.moodle.index');
     }
 
     public function listIgnoreA()

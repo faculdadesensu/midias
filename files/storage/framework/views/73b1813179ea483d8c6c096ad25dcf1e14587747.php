@@ -1,16 +1,16 @@
-@extends('template.template-admin')
-@section('title', 'Lista de usuários')
-@section('content')
 
-<link href="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+<?php $__env->startSection('title', 'Lista de usuários'); ?>
+<?php $__env->startSection('content'); ?>
 
-<script src="{{ URL::asset('vendor/datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/jszip.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.print.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/moment.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/datetime-moment.js') }}"></script>
+<link href="<?php echo e(URL::asset('vendor/datatables/buttons.bootstrap4.min.css')); ?>" rel="stylesheet">
+
+<script src="<?php echo e(URL::asset('vendor/datatables/dataTables.buttons.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.bootstrap4.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/jszip.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.html5.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.print.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/moment.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/datetime-moment.js')); ?>"></script>
 
 <?php
 @session_start();
@@ -21,8 +21,8 @@ if (!isset($id)) {
   $id = "";
 }
 ?>
-<h2 class="mb-4"><i>Lista de usuários cadastrados no Moodle {{$moodle}}</i></h2>
-<a href="{{ route('moodle.ignorados')}}" type="button" class="mb-3 btn btn-primary">Voltar para lista</a>
+<h2 class="mb-4"><i>Lista de usuários cadastrados no Moodle <?php echo e($moodle); ?></i></h2>
+<a href="<?php echo e(route('moodle.ignorados')); ?>" type="button" class="mb-3 btn btn-primary">Voltar para lista</a>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">
@@ -44,10 +44,10 @@ if (!isset($id)) {
   $(document).ready(function() {
 
     var route = "";
-    if ("{{$moodle}}" === "A") {
-      route = "{{ route('moodle.listA') }}"
-    } else if ("{{$moodle}}" === "B") {
-      route = "{{ route('moodle.listB') }}"
+    if ("<?php echo e($moodle); ?>" === "A") {
+      route = "<?php echo e(route('moodle.listA')); ?>"
+    } else if ("<?php echo e($moodle); ?>" === "B") {
+      route = "<?php echo e(route('moodle.listB')); ?>"
     }
 
     var dataTable = $('#dataTable_users').DataTable({
@@ -91,7 +91,7 @@ if (!isset($id)) {
         },
         {
           "data": function(data) {
-            return '<form action="{{route("moodle.add")}}" method="get">@csrf<input type="hidden" name="user_id" value="' + data.id + '"><input type="hidden" name="username" value="' + data.username + '"><input type="hidden" name="firstname" value="' + data.firstname + '"><input type="hidden" name="lastname" value="' + data.lastname + '"><input type="hidden" name="email" value="' + data.email + '"><input type="hidden" name="moodle" value="{{$moodle}}"><button title="Adicionar na lista"  class="btn btn-primary" type="submit">Adicionar</button></form>';
+            return '<form action="<?php echo e(route("moodle.add")); ?>" method="get"><?php echo csrf_field(); ?><input type="hidden" name="user_id" value="' + data.id + '"><input type="hidden" name="username" value="' + data.username + '"><input type="hidden" name="firstname" value="' + data.firstname + '"><input type="hidden" name="lastname" value="' + data.lastname + '"><input type="hidden" name="email" value="' + data.email + '"><input type="hidden" name="moodle" value="<?php echo e($moodle); ?>"><button title="Adicionar na lista"  class="btn btn-primary" type="submit">Adicionar</button></form>';
           },
           "name": "acoes",
         }
@@ -119,4 +119,5 @@ if (!isset($id)) {
   });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template.template-admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\midias\files\resources\views/painel-admin/moodle/users.blade.php ENDPATH**/ ?>

@@ -1,16 +1,16 @@
-@extends('template.template-admin')
-@section('title', 'Bloqueio e Desbloqueio Moodle')
-@section('content')
 
-<link href="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+<?php $__env->startSection('title', 'Bloqueio e Desbloqueio Moodle'); ?>
+<?php $__env->startSection('content'); ?>
 
-<script src="{{ URL::asset('vendor/datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/jszip.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/buttons.print.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/moment.min.js') }}"></script>
-<script src="{{ URL::asset('vendor/datatables/datetime-moment.js') }}"></script>
+<link href="<?php echo e(URL::asset('vendor/datatables/buttons.bootstrap4.min.css')); ?>" rel="stylesheet">
+
+<script src="<?php echo e(URL::asset('vendor/datatables/dataTables.buttons.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.bootstrap4.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/jszip.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.html5.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/buttons.print.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/moment.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('vendor/datatables/datetime-moment.js')); ?>"></script>
 
 <?php
 @session_start();
@@ -27,10 +27,10 @@ if (!isset($id)) {
     <div class="card-body">
       <div class="row">
         <div class="col-md-6 d-flex justify-content-center btn-group">
-          <a type="button" href="{{route('moodle.lock')}}" class="btn btn-sm btn-primary btn-margin-responsive">Bloquear</a>
+          <a type="button" href="<?php echo e(route('moodle.lock')); ?>" class="btn btn-sm btn-primary btn-margin-responsive">Bloquear</a>
         </div>
         <div class="col-md-6 d-flex justify-content-center btn-group">
-          <a type="button" href="{{route('moodle.unlock')}}" class="btn btn-sm btn-primary">Desbloquear</a>
+          <a type="button" href="<?php echo e(route('moodle.unlock')); ?>" class="btn btn-sm btn-primary">Desbloquear</a>
         </div>
       </div>
       <hr>
@@ -70,7 +70,7 @@ if (!isset($id)) {
     "serverSide": true,
     "autoWidth": true,
     "ajax": {
-      url: "{{route('moodle.index')}}",
+      url: "<?php echo e(route('moodle.index')); ?>",
       error: function(data) {
           alert("Erro desconhecido!");
         },
@@ -158,4 +158,5 @@ if (!isset($id)) {
   });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template.template-admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\midias\files\resources\views/painel-admin/moodle/index.blade.php ENDPATH**/ ?>
