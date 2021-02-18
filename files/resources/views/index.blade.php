@@ -34,19 +34,19 @@
             @foreach ($links as $item)
             <?php $count++; ?>
             @if($links->count() != $count)
-            <p><a class="btn" href="{{$item->link}}">{{$item->title}}</a></p>
+            <p><a class="btn" href="{{$item->link}}" target="_blank">{{$item->title}}</a></p>
             <hr size=1px>
             @else
-            <p><a id="btn-botton" class="btn" href="{{$item->link}}">{{$item->title}}</a></p>
+            <p><a id="btn-botton" class="btn" href="{{$item->link}}" target="_blank">{{$item->title}}</a></p>
             @endif
             @endforeach
             <div class="icon">
-                <a class="icon-social" id="whatsapp" href="https://api.whatsapp.com/send?phone=556239334450">.....</a>
-                <a class="icon-social" id="instagram" href="https://www.instagram.com/faculdade_sensu/">.....</a>
-                <a class="icon-social" id="facebook" href="https://www.facebook.com/faculdadesensu">.....</a>
-                <a class="icon-social" id="youtube" href="https://www.youtube.com/channel/UCS2qho79tP4hznASgyOFb0A?view_as=subscriber">.....</a>
-                <a class="icon-social" id="linkdin" href="https://br.linkedin.com/company/faculdadesensu">.....</a>
-                <a class="icon-social" id="twitter" href="https://twitter.com/FaculdadeSensu">.....</a>
+                <a class="icon-social" id="whatsapp" href="https://api.whatsapp.com/send?phone=556239334450" target="_blank">.....</a>
+                <a class="icon-social" id="instagram" href="https://www.instagram.com/faculdade_sensu/" target="_blank">.....</a>
+                <a class="icon-social" id="facebook" href="https://www.facebook.com/faculdadesensu" target="_blank">.....</a>
+                <a class="icon-social" id="youtube" href="https://www.youtube.com/channel/UCS2qho79tP4hznASgyOFb0A?view_as=subscriber" target="_blank">.....</a>
+                <a class="icon-social" id="linkdin" href="https://br.linkedin.com/company/faculdadesensu" target="_blank">.....</a>
+                <a class="icon-social" id="twitter" href="https://twitter.com/FaculdadeSensu" target="_blank">.....</a>
             </div>
         </div>
     </div>

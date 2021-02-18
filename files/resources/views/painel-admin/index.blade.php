@@ -10,7 +10,7 @@ if(@$_SESSION['level'] != 'admin' && @$_SESSION['level'] != 'user' ){
 use App\Models\Link;
 $links = link::orderby('id', 'desc')->get();
 ?>
-<h3 class="mb-5"><i>MONITORAMENTO DE LINKS</i></h3>
+<h3 class="mb-5">MONITORAMENTO DE LINKS</h3>
 <div class="row ml-2">
   @foreach ($links as $item)
   <div class="mr-5 mb-5" style="box-shadow: 0 0 1em rgb(0,0,0, 0.2); border-radius: 10px">

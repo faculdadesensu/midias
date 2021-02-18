@@ -21,7 +21,7 @@ if (!isset($id)) {
   $id = "";
 }
 ?>
-<h2 class="mb-4"><i>Lista de usuários que serão ignorados no bloqueio</i></h2>
+<h2 class="mb-4">Lista de usuários que serão ignorados no bloqueio</h2>
 
 <a href="{{route('moodle.listA')}}" type="button" class=" mb-3 btn btn-primary">Adicionar Novo - Moodle A</a>
 <a href="{{ route('moodle.listB')}}" type="button" class="mb-3 btn btn-primary">Adcionar Novo - Moodle B</a>

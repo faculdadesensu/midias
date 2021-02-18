@@ -38,8 +38,9 @@ html {
 
 @media(max-height: 890px) {
    .col-total {
-      width: 100vw;
-      height: 789px;
+      width: 100%;
+      height: 100%;
+      margin: 38px 0;
       display: flex;
       justify-content: center;
       align-items: center;
