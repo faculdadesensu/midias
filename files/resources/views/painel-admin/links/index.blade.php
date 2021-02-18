@@ -54,7 +54,7 @@ if(!isset($id)){
         Deseja Realmente Excluir este Registro?        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <a href="{{route('links.index')}}" type="button" class="mt-4 mb-4 btn btn-secondary">Cancelar</a>
         <form method="POST" action="{{route('links.delete', $id)}}">
           @csrf
           @method('delete')

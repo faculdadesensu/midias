@@ -19,8 +19,9 @@ class LinkController extends Controller
 
     public function modal($id)
     {
+          
         try {
-            $links = Link::orderby('', 'desc')->paginate();
+            $links = Link::orderby('id', 'desc')->paginate();
             return view('painel-admin.links.index', ['links' => $links, 'id' => $id]);        
         } catch (\Throwable $th) {
             return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
