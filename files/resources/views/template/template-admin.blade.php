@@ -93,7 +93,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-link"></i>
                     <span>Cadastro de Links</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -101,6 +101,12 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                         <a class="collapse-item" href="{{ route('links.index')}}">Links</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  href="{{route('home')}}" target="_blank">
+                    <i class="fas fa-home fa-chart"></i>
+                    <span>Pagina Principal</span>
+                </a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
