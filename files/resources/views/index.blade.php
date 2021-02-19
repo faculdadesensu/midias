@@ -52,7 +52,7 @@
     </div>
     <footer class="footer1">
         <div class="footer">
-            <small class="d-block mb-3 text-muted">&copy; Powered by: FAS - 2020</small>
+            <small class="d-block mb-3 text-muted">&copy; Powered by: FAS - 2021 - v{{ $version }}</small>
         </div>
     </footer>
 </body>
