@@ -28,7 +28,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">Senha</label>
-                <input value="{{$item->password}}" type="password" class="form-control" placeholder="Digite a Senha" name="password">
+                <input type="password" class="form-control" placeholder="Digite a Senha" name="password">
             </div>
         </div>
     </div>

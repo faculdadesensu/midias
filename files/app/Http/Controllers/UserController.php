@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         try {
             $username   = $request->username;
-            $password   = $request->password;
+            $password   = sha1($request->password);
 
             $users      = User::where('username', '=', $username)->where('password', '=', $password)->first();
 
@@ -22,7 +22,7 @@ class UserController extends Controller
                 $_SESSION['user_name'] = $users->name;
                 $_SESSION['level'] = $users->level;
 
-                if ($_SESSION['level'] == 'admin' || $_SESSION['level'] == 'user' ) {
+                if ($_SESSION['level'] == 'admin' || $_SESSION['level'] == 'user') {
                     return view('painel-admin.index');
                 }
             } else {
@@ -85,9 +85,8 @@ class UserController extends Controller
             $tabela->name        = $request->name;
             $tabela->username    = $request->username;
             $tabela->email       = $request->email;
-            $tabela->username    = $request->username;
             $tabela->level       = $request->level;
-            $tabela->password    = $request->password;
+            $tabela->password    = sha1($request->password);
 
             $check = User::where('username', '=', $request->username)->count();
             if ($check > 0) {
@@ -105,6 +104,7 @@ class UserController extends Controller
 
     public function edit(User $item)
     {
+        $item->password = null;
         return view('painel-admin.users.edit', ['item' => $item]);
     }
 
@@ -115,9 +115,12 @@ class UserController extends Controller
             $item->username    = $request->username;
             $item->email       = $request->email;
             $item->username    = $request->username;
-            $item->password    = $request->password;
             $oldUsername       = $request->oldUsername;
- 
+
+            if ($request->password != "" && $request->password != null) {
+                $item->password    = sha1($request->password);
+            }
+
             if ($oldUsername != $request->username) {
                 $check = User::where('username', '=', $request->username)->count();
                 if ($check > 0) {

@@ -15,7 +15,11 @@ class AdminController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->password = $request->password;
+        
+        if($request->password != "" && $request->password != null){
+            $user->password = sha1($request->password);
+        }
+
         $user->save();
         return redirect()->route('admin.index');
     }

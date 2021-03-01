@@ -246,7 +246,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
 
                         <div class="form-group">
                             <label>Senha</label>
-                            <input value="{{$usuario[0]->password}}" type="password" class="form-control" id="senha" name="password" placeholder="Senha">
+                            <input type="password" class="form-control" id="senha" name="password" placeholder="Senha">
                         </div>
                     </div>
                     <div class="modal-footer">
