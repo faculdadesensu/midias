@@ -19,10 +19,10 @@ class LinkController extends Controller
 
     public function modal($id)
     {
-          
+
         try {
             $links = Link::orderby('id', 'desc')->paginate();
-            return view('painel-admin.links.index', ['links' => $links, 'id' => $id]);        
+            return view('painel-admin.links.index', ['links' => $links, 'id' => $id]);
         } catch (\Throwable $th) {
             return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
         }
@@ -33,7 +33,7 @@ class LinkController extends Controller
         try {
             $links = Link::orderby('id', 'desc')->paginate();
 
-            return view('painel-admin.links.index', ['links' => $links]);        
+            return view('painel-admin.links.index', ['links' => $links]);
         } catch (\Throwable $th) {
             return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
         }
@@ -88,7 +88,11 @@ class LinkController extends Controller
             $item->save();
             return redirect()->route('links.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
-            return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
+            if (str_contains($th->getMessage(), "truncated: 1406 Data too long for column 'title'")) {
+                return redirect()->route('links.index')->with('error', utf8_encode('Título muito Extenso! Utilize no máximo 45 caracteres'));
+            } else {
+                return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
+            }
         }
     }
 }

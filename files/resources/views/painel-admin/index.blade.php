@@ -19,7 +19,7 @@ $links = link::orderby('id', 'desc')->get();
         <iframe src="{{$item->link}}"></iframe>
       </div>
       <div class="card-body mr-2">
-        <h4 class="card-title">{{$item->title}}</h4>
+        <h4 class="card-title" style="min-height: 57px; max-height: 57px; overflow: hidden;">{{$item->title}}</h4>
         <a href="{{$item->link}}" class="btn btn-primary" target="_blank">Acessar Link</a>
       </div>
     </div>

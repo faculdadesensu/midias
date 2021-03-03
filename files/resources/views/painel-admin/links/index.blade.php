@@ -18,7 +18,7 @@ if(!isset($id)){
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-          <th>Titulo</th>
+          <th>Título</th>
           <th>Link</th>
           <th>Ações</th>
           </tr>
