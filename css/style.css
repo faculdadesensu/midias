@@ -41,3 +41,10 @@
 }
 
 /*-----------------------------------------------------------------*/
+
+/*Define um espaçamento fixo para o titulo dos cards na home*/
+.space-limiter {
+   min-height: 57px;
+   max-height: 57px;
+   overflow: hidden;
+}

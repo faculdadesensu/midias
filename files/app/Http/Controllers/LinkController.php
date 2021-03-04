@@ -89,7 +89,9 @@ class LinkController extends Controller
             return redirect()->route('links.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
             if (str_contains($th->getMessage(), "truncated: 1406 Data too long for column 'title'")) {
-                return redirect()->route('links.index')->with('error', utf8_encode('Título muito Extenso! Utilize no máximo 45 caracteres'));
+                return redirect()->route('links.edit', ['item' => $item] )->with('error', utf8_encode('Título muito Extenso! Utilize no máximo 45 caracteres.'));
+            } else if (str_contains($th->getMessage(), "truncated: 1406 Data too long for column 'link'")) {
+                return redirect()->route('links.edit', ['item' => $item] )->with('error', utf8_encode('Link muito Extenso! Peça à administração aumentar o limite permitido.'));
             } else {
                 return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
             }
