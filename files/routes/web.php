@@ -15,8 +15,8 @@ Route::get('/admin', function () {
     return view('login.index');
 });
 
-Route::post('/admin',                  [UserController::class, 'logout'])->name('users.logout');
-Route::post('painel',                  [UserController::class, 'login'])->name('login');
+Route::post('/admin',                   [UserController::class, 'logout'])->name('users.logout');
+Route::post('painel',                   [UserController::class, 'login'])->name('login');
 
 //Rotas usuários
 Route::post('users',                    [UserController::class, 'insert'])->name('users.insert');
@@ -40,14 +40,14 @@ Route::put('links/{item}',              [LinkController::class, 'editar'])->name
 Route::delete('links/{item}',           [LinkController::class, 'delete'])->name('links.delete');
 Route::get('links/{item}',              [LinkController::class, 'modal'])->name('links.modal');
 Route::get('links',                     [LinkController::class, 'index'])->name('links.index');
-Route::post('links/reorder',              [LinkController::class, 'reorder'])->name('links.reorder');
+Route::post('links/reorder',            [LinkController::class, 'reorder'])->name('links.reorder');
 
 //Rotas Moodle
 Route::get('moodle',                                    [MoodleController::class, 'viewReports'])->name('moodle.index');
 Route::get('moodle/lock',                               [MoodleController::class, 'lock'])->name('moodle.lock');
 Route::get('moodle/unlock',                             [MoodleController::class, 'unlock'])->name('moodle.unlock');
-Route::get('moodle/lista-usuarios/a',                   [MoodleController::class, 'listIgnoreA'])->name('moodle.listA');
-Route::get('moodle/lista-usuarios/b',                   [MoodleController::class, 'listIgnoreB'])->name('moodle.listB');
+Route::get('moodle/lista-usuarios/ava_sensu',           [MoodleController::class, 'listIgnoreA'])->name('moodle.listA');
+Route::get('moodle/lista-usuarios/ead_fas',             [MoodleController::class, 'listIgnoreB'])->name('moodle.listB');
 Route::get('moodle/lista-usuarios/ignorados',           [MoodleController::class, 'list'])->name('moodle.ignorados');
 Route::delete('moodle/lista-usuarios/deletar/{id}',     [MoodleController::class, 'listDelete'])->name('moodle.delete');
 Route::get('moodle/adcionar-ignore/',                   [MoodleController::class, 'addIgnore'])->name('moodle.add');

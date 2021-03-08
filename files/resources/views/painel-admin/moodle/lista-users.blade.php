@@ -23,42 +23,49 @@ if (!isset($id)) {
 ?>
 <h2 class="mb-4">Lista de usuários que serão ignorados no bloqueio</h2>
 
-<a href="{{route('moodle.listA')}}" type="button" class=" mb-3 btn btn-primary">Adicionar Novo - Moodle A</a>
-<a href="{{ route('moodle.listB')}}" type="button" class="mb-3 btn btn-primary">Adcionar Novo - Moodle B</a>
+<a href="{{route('moodle.listA')}}" type="button" class=" mb-3 btn btn-primary">Adicionar Novo - AVA SENSU</a>
+<a href="{{ route('moodle.listB')}}" type="button" class="mb-3 btn btn-primary">Adcionar Novo - EAD FAS</a>
 
 <div class="card shadow mb-4">
   <div class="card-body">
-  <div class="table-responsive">
-    <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+    <div class="table-responsive">
+      <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
         <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Usuário</th>
-              <th>E-mail</th>
-              <th>Moodle</th>
-              <th>Ações</th>
-            </tr>
+          <tr>
+            <th>Nome</th>
+            <th>Usuário</th>
+            <th>E-mail</th>
+            <th>Moodle</th>
+            <th>Ações</th>
+          </tr>
         </thead>
         <tbody>
-        @for($i=0; $i < count($results); $i++) 
-          <tr>
-              <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
-              <td>{{$results[$i]->username}}</td>
-              <td>{{$results[$i]->email}} </td>
-              <td>{{$results[$i]->moodle}} </td>
-              <td>
-                <form action="{{route('moodle.delete', $results[$i]->id)}}" method="post">
-                  @csrf
-                  @method('delete')
-                  <button title="Adicionar na lista" class="btn btn-primary" type="submit">Excluir</button>
-                </form>
+          @for($i=0; $i < count($results); $i++) <tr>
+            <td>{{$results[$i]->firstname}} {{$results[$i]->lastname}}</td>
+            <td>{{$results[$i]->username}}</td>
+            <td>{{$results[$i]->email}} </td>
+            <td>
+              <?PHP
+              if ($results[$i]->moodle == "A") {
+                echo ("AVA SENSU");
+              } else if ($results[$i]->moodle == "B") {
+                echo ("EAD FAS");
+              }
+              ?>
             </td>
-          </tr>
-        @endfor
+            <td>
+              <form action="{{route('moodle.delete', $results[$i]->id)}}" method="post">
+                @csrf
+                @method('delete')
+                <button title="Adicionar na lista" class="btn btn-primary" type="submit">Excluir</button>
+              </form>
+            </td>
+            </tr>
+            @endfor
         </tbody>
-    </table>
+      </table>
+    </div>
   </div>
 </div>
-</div>   
 
 @endsection

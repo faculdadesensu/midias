@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Variável de versionamento dos scripts das views.
-        View::share('version', '1.3.0');
+        View::share('version', '1.3.1');
     }
 }

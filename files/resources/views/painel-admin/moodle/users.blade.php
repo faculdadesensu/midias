@@ -21,7 +21,16 @@ if (!isset($id)) {
   $id = "";
 }
 ?>
-<h2 class="mb-4"><i>Lista de usuários cadastrados no Moodle {{$moodle}}</i></h2>
+<h2 class="mb-4">Lista de usuários cadastrados no
+
+  <?php
+  if ($moodle == "A") {
+    echo("AVA SENSU");
+  } else if ($moodle == "B") {
+    echo("EAD FAS");
+  }
+  ?>
+</h2>
 <a href="{{ route('moodle.ignorados')}}" type="button" class="mb-3 btn btn-primary">Voltar para lista</a>
 <div class="card shadow mb-4">
   <div class="card-body">
