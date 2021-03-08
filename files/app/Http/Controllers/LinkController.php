@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LinkController extends Controller
 {
@@ -11,6 +12,8 @@ class LinkController extends Controller
     {
         try {
             $item->delete();
+            $this->atualizaIndex();
+
             return redirect()->route('links.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
             return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
@@ -21,7 +24,7 @@ class LinkController extends Controller
     {
 
         try {
-            $links = Link::orderby('id', 'desc')->paginate();
+            $links = Link::orderby('index', 'asc')->get();
             return view('painel-admin.links.index', ['links' => $links, 'id' => $id]);
         } catch (\Throwable $th) {
             return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
@@ -31,7 +34,7 @@ class LinkController extends Controller
     public function index()
     {
         try {
-            $links = Link::orderby('id', 'desc')->paginate();
+            $links = Link::orderby('index', 'asc')->get();
 
             return view('painel-admin.links.index', ['links' => $links]);
         } catch (\Throwable $th) {
@@ -59,6 +62,7 @@ class LinkController extends Controller
             }
 
             $tabela->save();
+            $this->atualizaIndex();
 
             return redirect()->route('links.index')->with('success', utf8_encode('Operação realizada com sucesso.'));
         } catch (\Throwable $th) {
@@ -101,6 +105,42 @@ class LinkController extends Controller
             } else {
                 return redirect()->route('links.index')->with('error', utf8_encode('Erro desconhecido!'));
             }
+        }
+    }
+
+    public function reorder(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            foreach ($request->data as $data) {
+                Link::where('id', $data[1])->update(array('index' => $data[0]));
+            }
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'msg' => 'Operação realizada com sucesso.']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'msg' => 'Erro desconhecido!']);
+        }
+    }
+
+    public function atualizaIndex()
+    {
+        try {
+            DB::beginTransaction();
+            $links = Link::orderby('index', 'asc')->get();
+
+            $count = 1;
+            foreach ($links as $link) {
+                Link::where('id', $link->id)->update(array('index' => $count));
+                $count++;
+            }
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'msg' => 'Operação realizada com sucesso.']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'msg' => 'Erro desconhecido!']);
         }
     }
 }

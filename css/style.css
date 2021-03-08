@@ -48,3 +48,8 @@
    max-height: 57px;
    overflow: hidden;
 }
+
+/*Atualiza o cursor para os botões desabilitados*/
+button:disabled {
+   cursor: not-allowed;
+ }

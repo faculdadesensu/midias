@@ -40,6 +40,7 @@ Route::put('links/{item}',              [LinkController::class, 'editar'])->name
 Route::delete('links/{item}',           [LinkController::class, 'delete'])->name('links.delete');
 Route::get('links/{item}',              [LinkController::class, 'modal'])->name('links.modal');
 Route::get('links',                     [LinkController::class, 'index'])->name('links.index');
+Route::post('links/reorder',              [LinkController::class, 'reorder'])->name('links.reorder');
 
 //Rotas Moodle
 Route::get('moodle',                                    [MoodleController::class, 'viewReports'])->name('moodle.index');

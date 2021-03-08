@@ -33,6 +33,8 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
     <link href="{{ URL::asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('vendor/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 
+    <!-- Global custom scripts -->
+    <script src="{{ URL::asset('js/global.js') }}?{{$version}}"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}?{{$version}}"></script>
@@ -87,7 +89,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                         <a class="collapse-item" href="{{ route('users.index')}}">Usuários</a>
                     </div>
                 </div>
-               
+
             </li>
             @endif
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -103,7 +105,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link"  href="{{route('home')}}" target="_blank">
+                <a class="nav-link" href="{{route('home')}}" target="_blank">
                     <i class="fas fa-home fa-chart"></i>
                     <span>Pagina Principal</span>
                 </a>
@@ -111,7 +113,7 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
             <!-- Divider -->
             <hr class="sidebar-divider">
             @if ($_SESSION['level'] == 'admin')
-                <!-- Heading -->
+            <!-- Heading -->
             <div class="sidebar-heading">
                 MOODLE
             </div>
@@ -174,27 +176,13 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @if(\Session::has('success'))
-
-                    <div class="alert alert-success alert-position" role="alert" id="success-alert">
-                        {{utf8_decode(\Session::get('success'))}}
+                    <div class="alert alert-success alert-position" role="alert" id="success-alert" hidden>
+                        <span id="success-msg"></span>
                     </div>
 
-                    <script>
-                        // Faz com que o alerta desapareça após 2 segundos em um tempo de 0.5 segundos de acordo com seu ID.
-                        $(document).ready(function() {
-                            $('#success-alert').hide();
-                            $('#success-alert').fadeTo(2000, 500).fadeOut(500);
-                        });
-                    </script>
-
-                    @elseif(\Session::has('error'))
-
-                    <div class="alert alert-danger" role="alert" id="danger-alert">
-                        {{utf8_decode(\Session::get('error'))}}
+                    <div class="alert alert-danger" role="alert" id="danger-alert" hidden>
+                        <span id="danger-msg"></span>
                     </div>
-
-                    @endif
 
                     @yield('content')
 
@@ -258,6 +246,19 @@ $usuario = DB::select('select * from users where id =' . $id_usuario);
         </div>
     </div>
 
+    @if(\Session::has('success'))
+    <script>
+        $(document).ready(function() {
+            alertMsg('success', "{{utf8_decode(\Session::get('success'))}}");
+        });
+    </script>
+    @elseif(\Session::has('error'))
+    <script>
+        $(document).ready(function() {
+            alertMsg('error', "{{utf8_decode(\Session::get('error'))}}");
+        });
+    </script>
+    @endif
 
     <!-- Core plugin JavaScript-->
     <script src="{{ URL::asset('vendor/jquery-easing/jquery.easing.min.js') }}?{{$version}}"></script>

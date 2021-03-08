@@ -27,7 +27,7 @@
 
             use App\Models\Link;
 
-            $links = Link::orderby('id', 'desc')->paginate();
+            $links = Link::orderby('index', 'asc')->get();
             // Variável contador para verificar quando é a ultima linha.
             $count = 0;
             ?>
