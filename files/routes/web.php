@@ -41,6 +41,7 @@ Route::delete('links/{item}',           [LinkController::class, 'delete'])->name
 Route::get('links/{item}',              [LinkController::class, 'modal'])->name('links.modal');
 Route::get('links',                     [LinkController::class, 'index'])->name('links.index');
 Route::post('links/reorder',            [LinkController::class, 'reorder'])->name('links.reorder');
+Route::post('links/count',              [LinkController::class, 'count'])->name('links.count');
 
 //Rotas Moodle
 Route::get('moodle',                                    [MoodleController::class, 'viewReports'])->name('moodle.index');

@@ -143,4 +143,19 @@ class LinkController extends Controller
             return response()->json(['status' => 'error', 'msg' => 'Erro desconhecido!']);
         }
     }
+
+    public function count(Request $request)
+    {
+        try {
+            $id = $request;
+            return json_encode($id);
+        } catch (\Throwable $th) {
+            echo json_encode(array(
+                'error' => array(
+                    'msg' => $th->getMessage(),
+                    'code' => $th->getCode(),
+                ),
+            ));
+        }
+    }
 }

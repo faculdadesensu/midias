@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Faculdade SENSU">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Midias Faculdade Sensu</title>
 
@@ -34,10 +35,10 @@
             @foreach ($links as $item)
             <?php $count++; ?>
             @if($links->count() != $count)
-            <p><a class="btn" href="{{$item->link}}" target="_blank">{{$item->title}}</a></p>
+            <p><a onclick="contadorAcessos('{{$item->id}}')" class="btn" href="{{$item->link}}" target="_blank">{{$item->title}}</a></p>
             <hr size=1px>
             @else
-            <p><a id="btn-botton" class="btn" href="{{$item->link}}" target="_blank">{{$item->title}}</a></p>
+            <p><a onclick="contadorAcessos('{{$item->id}}')" id="btn-botton" class="btn" href="{{$item->link}}" target="_blank">{{$item->title}}</a></p>
             @endif
             @endforeach
             <div class="icon">
@@ -57,5 +58,35 @@
     </footer>
 </body>
 <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/d2db8af8-3ac5-4b11-962e-abf1a30aa282-loader.js"></script>
+
+<script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}?{{$version}}"></script>
+<script>
+    function contadorAcessos(id) {
+        debugger
+       /* $.ajax({
+            url: "{{ route('links.count') }}",
+        }).done(function() {
+            alert('done');
+        });*/
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('links.count') }}",
+            type: 'post',
+            data: { 'data':id },
+            dataType: 'JSON',
+            success: function(result) {
+                debugger
+                alert(result);
+            },
+            error: function(result) {
+                debugger
+                alert(result);
+            }
+        });
+    }
+</script>
 
 </html>
