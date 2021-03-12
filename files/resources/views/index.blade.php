@@ -28,7 +28,7 @@
 
             use App\Models\Link;
 
-            $links = Link::orderby('index', 'asc')->get();
+            $links = Link::orderby('index', 'asc')->where('inactive', '=', 0)->get();
             // Variável contador para verificar quando é a ultima linha.
             $count = 0;
             ?>
@@ -61,29 +61,20 @@
 
 <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}?{{$version}}"></script>
 <script>
-    function contadorAcessos(id) {
-        debugger
-       /* $.ajax({
-            url: "{{ route('links.count') }}",
-        }).done(function() {
-            alert('done');
-        });*/
-
+    function contadorAcessos(id_link) {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: "{{ route('links.count') }}",
-            type: 'post',
-            data: { 'data':id },
+            method: 'post',
+            data: {
+                'id_link': id_link
+            },
             dataType: 'JSON',
             success: function(result) {
-                debugger
-                alert(result);
             },
             error: function(result) {
-                debugger
-                alert(result);
             }
         });
     }
