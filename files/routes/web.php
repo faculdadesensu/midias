@@ -15,6 +15,10 @@ Route::get('/admin', function () {
     return view('login.index');
 });
 
+Route::get('/grafico', function () {
+    return view('painel-admin.links.chart');
+})->name('chart');
+
 Route::post('/admin',                   [UserController::class, 'logout'])->name('users.logout');
 Route::post('painel',                   [UserController::class, 'login'])->name('login');
 

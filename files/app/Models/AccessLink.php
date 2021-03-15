@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AccessLinks extends Model
+class AccessLink extends Model
 {
     public $timestamps = false;
     use HasFactory;

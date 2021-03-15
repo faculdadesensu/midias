@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AccessLinks;
+use App\Models\AccessLink;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -159,7 +159,7 @@ class LinkController extends Controller
             $data = $request->all();
 
             // Consulta a contagem da data atual.
-            $accessLink = AccessLinks::where('id_link', '=', $data['id_link'])->where('date', '=', date('Y-m-d'))->first();
+            $accessLink = AccessLink::where('id_link', '=', $data['id_link'])->where('date', '=', date('Y-m-d'))->first();
 
             // Se já existe um registro com a data atual, soma +1 a contagem.
             if ($accessLink) {
@@ -169,7 +169,7 @@ class LinkController extends Controller
             }
             // Se ainda não existe um registro com a data atual, cria um.
             else {
-                $accessLink = new AccessLinks;
+                $accessLink = new AccessLink;
                 $accessLink->id_link = $data['id_link'];
                 $accessLink->date = date('Y-m-d');
                 $accessLink->count = 1;
