@@ -43,6 +43,7 @@
 /*-----------------------------------------------------------------*/
 
 /*Define um espaçamento fixo para o titulo dos cards na home*/
+
 .space-limiter {
    min-height: 57px;
    max-height: 57px;
@@ -50,6 +51,38 @@
 }
 
 /*Atualiza o cursor para os botões desabilitados*/
+
 button:disabled {
    cursor: not-allowed;
- }
+}
+
+/*Rodapé do modal customizado*/
+
+.modal-footer-custom {
+   padding: 1rem;
+   border-top: 1px solid #e3e6f0;
+}
+
+/*Cabeçario do modal de alerta*/
+
+.modal-header-danger {
+   background-color: #ffd5d3;
+   color: #930701;
+   display: flex;
+   align-items: flex-start;
+   justify-content: space-between;
+   padding: 1rem 1rem;
+   border-bottom: 1px solid #e4a9a6;
+   border-top-left-radius: 0.3rem;
+   border-top-right-radius: 0.3rem;
+}
+
+.modal-header-danger h5 {
+   font-weight: bold;
+}
+
+.modal-header-danger button span {
+   color: #930701;
+}
+
+/*----------------------------*/
