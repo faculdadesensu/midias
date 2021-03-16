@@ -8,6 +8,8 @@ use App\Models\Link;
 use Carbon\Carbon;
 ?>
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <div class="row">
@@ -21,13 +23,13 @@ use Carbon\Carbon;
                         <div class="form-group">
                             <label>Links</label>
                             <?php
-                            $links = Link::where('inactive', '=', 0)->get();
+                            $links = Link::where('inactive', '=', 0)->orderBy('index')->get();
                             $count = 0;
                             ?>
                             @foreach($links as $link)
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="{{$link->id}}" name="links" id="radioLink-{{$link->id}}" <?php if ($count == 0) echo ('checked'); ?>>
-                                <label class="form-check-label" for="radioLink-{{$link->id}}">{{$link->title}}</label>
+                                <input class="form-check-input" type="checkbox" value="{{$link->id}}" name="checkboxLink" id="checkboxLink-{{$link->id}}" <?php if ($count == 0) echo ('checked'); ?>>
+                                <label class="form-check-label" for="checkboxLink-{{$link->id}}">{{$link->title}}</label>
                             </div>
                             <?php $count++; ?>
                             @endforeach
@@ -43,13 +45,13 @@ use Carbon\Carbon;
                                     $dataInicial = $dataInicial->modify('-7 day')->format('Y-m-d');
                                     ?>
                                     <label>Data Inicial</label>
-                                    <input class="form-control form-control-sm" type="date" value="<?php echo $dataInicial ?>" id="data-inicial">
+                                    <input class="form-control form-control-sm" type="date" value="<?php echo $dataInicial ?>" id="startDate">
                                 </div>
                             </div>
                             <div class="offset-2 col-4">
                                 <div class="form-group">
                                     <label>Data Final</label>
-                                    <input class="form-control form-control-sm" type="date" value="<?php echo date('Y-m-d') ?>" id="data-final">
+                                    <input class="form-control form-control-sm" type="date" value="<?php echo date('Y-m-d') ?>" id="endDate">
                                 </div>
                             </div>
                         </div>
@@ -62,10 +64,49 @@ use Carbon\Carbon;
         </div>
     </div>
 </div>
+<div id="loadding"></div>
 
 <script>
+    function verifyCheckBoxChecked() {
+        var list = [];
+        $('input[name="checkboxLink"]:checked').each(function() {
+            list.push(this.value);
+        });
+        return list;
+    }
+
+    // Submit da função reordenar (feito com AJAX)
+    $('input[name = "checkboxLink"]').change(function(e) {
+        e.preventDefault();
+
+        var listIdLink = verifyCheckBoxChecked();
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('links.filter_rel') }}",
+            method: 'get',
+            data: {
+                listIdLink: listIdLink,
+                startDate: startDate,
+                endDate: endDate
+            },
+            dataType: 'JSON',
+            success: function(result) {
+                console.log(result);
+            },
+            error: function(result) {
+            },
+        });
+    });
+
     listaDatas =
         <?php
+
+
         $qtdDiasConsulta = 7;
         // Define o período do relatório.
         $dataInicial = new Carbon('today');
@@ -126,7 +167,7 @@ use Carbon\Carbon;
             fill: false,
             label: i,
             data: listaAcessos[i],
-            lineTension: 0.5,
+            lineTension: 0.2,
             backgroundColor: listaCores[count],
             borderColor: listaCores[count]
         });
@@ -140,7 +181,7 @@ use Carbon\Carbon;
             type: 'line',
             data: {
                 labels: listaDatas,
-                datasets: listaDataSets,
+                datasets: listaDataSets
             },
             options: {
                 scales: {

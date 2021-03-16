@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AccessLink;
 use App\Models\Link;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -177,6 +178,57 @@ class LinkController extends Controller
                 $accessLink->save();
                 return response()->json('Registro criado');
             }
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
+        }
+    }
+
+    public function filter_rel(Request $request)
+    {
+        try {
+
+            $listIdLink = $request->listIdLink;
+            $startDate = $request->startDate;
+            $endDate = $request->endDate;
+
+            $listAccessLinkAux = AccessLink::select('access_links.*', 'links.title')->whereIn('id_link', $listIdLink)->whereBetween('date', [$startDate, $endDate])->join('links', 'links.id', '=', 'access_links.id_link')->orderBy('id_link')->orderBy('date')->get();
+
+            $startDate = date_create($startDate);
+            $endDate = date_create($endDate);
+
+            // Monta uma lista com todas as datas que serão utilizadas no relatório.
+            $listDate = [];
+            for ($dataAux = $startDate; $dataAux != $endDate;) {
+                $dataAux = $dataAux->modify('+1 day');
+                array_push($listDate, $dataAux->format('d/m/Y'));
+            }
+
+            // Preenche a lista de dados que será utilizada para a montagem do seu site.
+            $listAccessLink = [];
+            foreach ($listAccessLinkAux as $accessLink) {
+                $accessLink->date = date_format(date_create($accessLink->date), 'd/m/Y');
+
+                if (!isset($listAccessLink[$accessLink->title])) {
+                    $listAccessLink[$accessLink->title] = $listDate;
+                }
+
+                $index = array_search($accessLink->date, $listAccessLink[$accessLink->title]);
+                $listAccessLink[$accessLink->title][$index] = $accessLink->count;
+            }
+
+            foreach ($listAccessLink as $accessLink) {
+                for ($i=0; $i < count($accessLink); $i++) { 
+                    if(is_string($accessLink[$i])){
+                        return response()->json('teste');
+                        $accessLink[$i] = 0;
+                    }
+                }
+            }
+
+            // Monta o objeto para retornar à tela
+            $results = ['listDate' => $listDate, 'listAccessLink' => $listAccessLink];
+
+            return response()->json($results);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }

@@ -18,6 +18,8 @@ Route::get('/admin', function () {
 Route::get('/grafico', function () {
     return view('painel-admin.links.chart');
 })->name('chart');
+Route::get('links/filter',              [LinkController::class, 'filter_rel'])->name('links.filter_rel');
+
 
 Route::post('/admin',                   [UserController::class, 'logout'])->name('users.logout');
 Route::post('painel',                   [UserController::class, 'login'])->name('login');
