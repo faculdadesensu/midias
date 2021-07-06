@@ -96,7 +96,8 @@ use Carbon\Carbon;
             },
             dataType: 'JSON',
             success: function(result) {
-                console.log(result);
+                listaDatas = result.listDate;
+                listaAcessos = result.listAccessLink;
             },
             error: function(result) {
             },

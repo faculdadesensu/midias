@@ -216,13 +216,14 @@ class LinkController extends Controller
                 $listAccessLink[$accessLink->title][$index] = $accessLink->count;
             }
 
-            foreach ($listAccessLink as $accessLink) {
+            // Monta a lista de valores correspondentes a cada data de cada Link (onde o dia que não tiver um valor recebe 0)
+            foreach ($listAccessLink as $key => $accessLink) {
                 for ($i=0; $i < count($accessLink); $i++) { 
                     if(is_string($accessLink[$i])){
-                        return response()->json('teste');
                         $accessLink[$i] = 0;
                     }
                 }
+                $listAccessLink[$key] = $accessLink;
             }
 
             // Monta o objeto para retornar à tela
